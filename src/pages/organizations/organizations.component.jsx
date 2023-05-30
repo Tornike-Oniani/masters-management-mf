@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+import OrganizationItem from '../../components/organization-item/organization-item.component';
 import DynamicList from '../../components/dynamic-list/dynamic-list.component';
 
 const Organizations = () => {
@@ -325,7 +327,12 @@ const Organizations = () => {
               onChange={handleSearch}
             />
           </div>
-          <DynamicList columns={columns} rows={rows} filter={filter} />
+          <DynamicList
+            columns={columns}
+            rows={rows}
+            filter={filter}
+            ItemComponent={OrganizationItem}
+          />
         </div>
       </div>
     </div>

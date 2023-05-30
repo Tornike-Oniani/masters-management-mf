@@ -12,7 +12,7 @@ import BrowseIcon from '../../assets/folder-open.svg';
 import EditIcon from '../../assets/pencil-icon.svg';
 import ArrowDownIcon from '../../assets/arrow-down.svg';
 
-const DynamicList = ({ columns, rows, filter }) => {
+const DynamicList = ({ columns, rows, filter, ItemComponent }) => {
   useEffect(() => {
     setActivePage(1);
   }, [filter]);
@@ -48,19 +48,13 @@ const DynamicList = ({ columns, rows, filter }) => {
               {columns.map((column) => {
                 if (column.accessor === 'actions') {
                   return (
-                    <th
-                      className="p-3 text-base font-semibold tracing-wide text-left text-cst-text-gray-800"
-                      key={column.accessor}
-                    >
+                    <th className="table-header-item" key={column.accessor}>
                       {column.label}
                     </th>
                   );
                 }
                 return (
-                  <th
-                    className="p-3 text-base font-semibold tracing-wide text-left text-cst-text-gray-800"
-                    key={column.accessor}
-                  >
+                  <th className="table-header-item" key={column.accessor}>
                     <div
                       className="flex items-center cursor-pointer"
                       onClick={() => handleSort(column.accessor)}
@@ -85,40 +79,7 @@ const DynamicList = ({ columns, rows, filter }) => {
           </thead>
           <tbody className="divide-y divide-gray-300">
             {calculatedRows.map((row) => {
-              return (
-                <tr key={row.id}>
-                  {columns.map((column) => {
-                    if (column.accessor === 'actions') {
-                      return (
-                        <td
-                          key={column.accessor}
-                          className="p-3 text-base text-cst-text-gray-800 flex justify-start"
-                        >
-                          <div className="flex items-center justify-start">
-                            <NavLink
-                              to={`/${row.id}`}
-                              className="p-2 border border-gray-500 rounded cursor-pointer mr-2"
-                            >
-                              {<BrowseIcon className="fill-gray-500" />}
-                            </NavLink>
-                            <div className="p-2 border border-gray-500 rounded cursor-pointer">
-                              {<EditIcon className="fill-gray-500" />}
-                            </div>
-                          </div>
-                        </td>
-                      );
-                    }
-                    return (
-                      <td
-                        key={column.accessor}
-                        className="p-3 text-base text-gray-700 whitespace-nowrap"
-                      >
-                        {row[column.accessor]}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
+              return <ItemComponent key={row.id} data={row} />;
             })}
           </tbody>
         </table>

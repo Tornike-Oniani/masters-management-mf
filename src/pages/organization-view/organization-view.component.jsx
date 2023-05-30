@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
+import ApplicationItem from '../../components/application-item/application-item.component';
+import UserItem from '../../components/user-item/user-item.component';
+
 import DynamicList from '../../components/dynamic-list/dynamic-list.component';
 import RolesList from '../../components/roles-list/roles-list.component';
 
 const OrganizationView = () => {
-  const [activeTab, setActiveTab] = useState('Roles');
+  const [activeTab, setActiveTab] = useState('Applications');
 
   const renderTabContent = () => {
     if (activeTab === 'Applications') {
@@ -26,19 +29,33 @@ const OrganizationView = () => {
           permissions: 44,
         },
       ];
-      return <DynamicList columns={columns} rows={rows} />;
+      return (
+        <div className="">
+          <div className="flex items-center justify-between p-4">
+            <button className="btn-primary">Add new Application</button>
+            <input
+              type="text"
+              className="text-input"
+              placeholder="Search application"
+            />
+          </div>
+          <DynamicList
+            columns={columns}
+            rows={rows}
+            ItemComponent={ApplicationItem}
+          />
+        </div>
+      );
     }
     if (activeTab === 'Roles') {
       return (
         <div>
           <div className="flex items-center justify-between p-4">
-            <button className="bg-purple-800 hover:bg-purple-900 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-              Add new role
-            </button>
+            <button className="btn-primary">Add new role</button>
             <input
               type="text"
               placeholder="Search roles"
-              className="appearance-none border border-gray-500 rounded py-2 px-3 text-gray-500 focus:outline-none focus:shadow-outline mr-3"
+              className="text-input"
             />
           </div>
           <RolesList />
@@ -300,7 +317,19 @@ const OrganizationView = () => {
           roles: ['Admin'],
         },
       ];
-      return <DynamicList columns={columns} rows={rows} />;
+      return (
+        <div className="">
+          <div className="flex items-center justify-between p-4">
+            <button className="btn-primary">Add new User</button>
+            <input
+              type="text"
+              placeholder="Search users"
+              className="text-input"
+            />
+          </div>
+          <DynamicList columns={columns} rows={rows} ItemComponent={UserItem} />
+        </div>
+      );
     }
   };
 
@@ -327,9 +356,9 @@ const OrganizationView = () => {
           <div className="flex items-center">
             <div
               className={
-                'text-lg px-6 py-3 border-b-2 border-gray-400 cursor-pointer font-semibold text-gray-600' +
+                'text-lg px-6 py-3 border-b-2 border-gray-400 cursor-pointer font-semibold text-cst-text-gray-800' +
                 (activeTab === 'Applications'
-                  ? ' border-purple-800 text-purple-800'
+                  ? ' border-cst-lavender-800 text-cst-lavender-800'
                   : '')
               }
               onClick={() => setActiveTab('Applications')}
@@ -338,9 +367,9 @@ const OrganizationView = () => {
             </div>
             <div
               className={
-                'text-lg px-6 py-3 border-b-2 border-gray-400 cursor-pointer font-semibold text-gray-600' +
+                'text-lg px-6 py-3 border-b-2 border-gray-400 cursor-pointer font-semibold text-cst-text-gray-800' +
                 (activeTab === 'Roles'
-                  ? ' border-purple-800 text-purple-800'
+                  ? ' border-cst-lavender-800 text-cst-lavender-800'
                   : '')
               }
               onClick={() => setActiveTab('Roles')}
@@ -349,9 +378,9 @@ const OrganizationView = () => {
             </div>
             <div
               className={
-                'text-lg px-6 py-3 border-b-2 border-gray-400 cursor-pointer font-semibold text-gray-600' +
+                'text-lg px-6 py-3 border-b-2 border-gray-400 cursor-pointer font-semibold text-cst-text-gray-800' +
                 (activeTab === 'Users'
-                  ? ' border-purple-800 text-purple-800'
+                  ? ' border-cst-lavender-800 text-cst-lavender-800'
                   : '')
               }
               onClick={() => setActiveTab('Users')}
