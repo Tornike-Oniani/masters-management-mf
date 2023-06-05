@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import DynamicList from '../dynamic-list/dynamic-list.component';
 import UserItem from '../user-item/user-item.component';
+import Popup from '../popup/popup.component';
 
 const UsersView = () => {
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
   const columns = [
     { accessor: 'id', label: '#' },
     { accessor: 'firstName', label: 'First Name' },
@@ -259,10 +262,53 @@ const UsersView = () => {
       roles: ['Admin'],
     },
   ];
+
   return (
     <div className="">
+      <Popup
+        isVisible={isPopupVisible}
+        setIsVisible={setIsPopupVisible}
+        title="Add new user"
+        label="Please fill in all the mandatory fields."
+      >
+        <div className="flex flex-col">
+          <label htmlFor="first_name" className="font-base font-semibold mb-1">
+            First name*
+          </label>
+          <input
+            type="text"
+            id="first_name"
+            className="text-input mb-3"
+            placeholder="John"
+          />
+          <label htmlFor="last_name" className="font-base font-semibold mr-1">
+            Last name*
+          </label>
+          <input
+            type="text"
+            id="first_name"
+            className="text-input mb-3"
+            placeholder="Doe"
+          />
+          <label htmlFor="first_name" className="font-base font-semibold mb-1">
+            Email*
+          </label>
+          <input
+            type="email"
+            id="first_name"
+            className="text-input mb-3"
+            placeholder="example@gmail.com"
+          />
+          <div className="flex w-full">
+            <button className="btn-primary flex-1 mr-3">Save</button>
+            <button className="btn-primary flex-1">Cancel</button>
+          </div>
+        </div>
+      </Popup>
       <div className="flex items-center justify-between p-4">
-        <button className="btn-primary">Add new User</button>
+        <button className="btn-primary" onClick={() => setIsPopupVisible(true)}>
+          Add new User
+        </button>
         <input type="text" placeholder="Search users" className="text-input" />
       </div>
       <DynamicList columns={columns} rows={rows} ItemComponent={UserItem} />
