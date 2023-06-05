@@ -18,9 +18,8 @@ const Pagination = ({
   };
 
   const [inputValue, setInputValue] = useState(rowsPerPage);
-
-  const beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1;
-  const end = activePage === totalPages ? count : beginning + rowsPerPage - 1;
+  let beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1;
+  let end = activePage === totalPages ? count : beginning + rowsPerPage - 1;
 
   return (
     <div className="flex justify-between items-center p-4 pr-6">

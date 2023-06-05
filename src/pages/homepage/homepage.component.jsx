@@ -1,0 +1,40 @@
+import React, { useState } from 'react';
+import { Routes, Route, Outlet } from 'react-router-dom';
+
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs.component';
+import Organizations from '../../components/organizations/organizations.component';
+import OrganizationView from '../../components/organization-view/organization-view.component';
+
+const Homepage = () => {
+  const [crumbs, setCrumbs] = useState([]);
+
+  return (
+    // Gray background
+    <div className="w-full min-h-screen max-h-full bg-cst-gray-800">
+      <div className="w-4/5 m-auto">
+        {/* Header with title, breadcrumbs, search, add */}
+        <div className="flex justify-between py-8">
+          {/* Title & breadcrumbs */}
+          <div className="">
+            <h3 className="font-bold text-2xl text-cst-text-gray-800 mb-2">
+              Manage Organizations
+            </h3>
+            <Breadcrumbs crumbs={crumbs} />
+          </div>
+        </div>
+        <div className="">
+          <Routes>
+            <Route path="/" element={<Organizations setCrumbs={setCrumbs} />} />
+            <Route
+              path="/:id"
+              element={<OrganizationView setCrumbs={setCrumbs} />}
+            />
+          </Routes>
+        </div>
+      </div>
+      <Outlet />
+    </div>
+  );
+};
+
+export default Homepage;

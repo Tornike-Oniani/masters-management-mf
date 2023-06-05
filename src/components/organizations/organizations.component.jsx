@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import OrganizationItem from '../../components/organization-item/organization-item.component';
 import DynamicList from '../../components/dynamic-list/dynamic-list.component';
 
-const Organizations = () => {
+const Organizations = ({ setCrumbs }) => {
+  const addOrgRef = useRef(null);
   const [filter, setFilter] = useState('');
   const [addFormIsVisible, setAddFromIsVisible] = useState(false);
+
+  useEffect(() => {
+    setCrumbs([
+      {
+        path: '/',
+        label: 'Organizations',
+      },
+    ]);
+    if (addFormIsVisible) {
+      addOrgRef.current.focus();
+    }
+  }, [addFormIsVisible]);
 
   const handleSearch = (event) => {
     setFilter(event.target.value);
@@ -268,73 +281,59 @@ const Organizations = () => {
   ];
 
   return (
-    // Gray background
-    <div className="w-full min-h-screen max-h-full bg-cst-gray-800">
-      <div className="w-4/5 m-auto">
-        {/* Header with title, breadcrumbs, search, add */}
-        <div className="flex justify-between py-8">
-          {/* Title & breadcrumbs */}
-          <div className="">
-            <h3 className="font-bold text-2xl text-cst-text-gray-800">
-              Manage Organizations
-            </h3>
-            <span className="text-base text-cst-text-gray-800">
-              Organizations
-            </span>
-          </div>
-        </div>
-        <div className="bg-white rounded shadow-md overflow-auto">
-          <h3 className="font-semibold text-xl p-4 text-gray-600">
-            Available Organizations
-          </h3>
-          <div className="flex justify-between px-4 py-2">
-            <div className="">
-              <button
-                className={'btn-primary ' + (addFormIsVisible ? 'hidden' : '')}
-                onClick={() => setAddFromIsVisible(true)}
-              >
-                Add Organization
-              </button>
-              <div
-                className={
-                  'flex items-center ' + (addFormIsVisible ? '' : 'hidden')
-                }
-              >
-                <input
-                  type="text"
-                  className="text-input mr-2"
-                  placeholder="Organization name"
-                />
-                <button
-                  className="btn-primary w-24 mr-2"
-                  onClick={() => setAddFromIsVisible(false)}
-                >
-                  Save
-                </button>
-                <button
-                  className="btn-primary w-24"
-                  onClick={() => setAddFromIsVisible(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
+    <div className="bg-white rounded shadow-md overflow-auto">
+      <h3 className="font-semibold text-xl px-4 pt-4 text-gray-600">
+        Available Organizations
+      </h3>
+      <div className="flex justify-between p-4">
+        <div className="">
+          <button
+            className={'btn-primary ' + (addFormIsVisible ? 'hidden' : '')}
+            onClick={() => {
+              setAddFromIsVisible(true);
+            }}
+          >
+            Add Organization
+          </button>
+          <div
+            className={
+              'flex items-center ' + (addFormIsVisible ? '' : 'hidden')
+            }
+          >
             <input
+              ref={addOrgRef}
               type="text"
-              placeholder="Search organization"
-              id="searchOrganization"
-              className="text-input mr-3"
-              onChange={handleSearch}
+              className="text-input mr-2"
+              placeholder="Organization name"
             />
+            <button
+              className="btn-primary w-24 mr-2"
+              onClick={() => setAddFromIsVisible(false)}
+            >
+              Save
+            </button>
+            <button
+              className="btn-primary w-24"
+              onClick={() => setAddFromIsVisible(false)}
+            >
+              Cancel
+            </button>
           </div>
-          <DynamicList
-            columns={columns}
-            rows={rows}
-            filter={filter}
-            ItemComponent={OrganizationItem}
-          />
         </div>
+        <input
+          type="text"
+          placeholder="Search organization"
+          id="searchOrganization"
+          className="text-input mr-3"
+          onChange={handleSearch}
+        />
       </div>
+      <DynamicList
+        columns={columns}
+        rows={rows}
+        filter={filter}
+        ItemComponent={OrganizationItem}
+      />
     </div>
   );
 };

@@ -8,7 +8,7 @@ const ApplicationItem = ({ data }) => {
   const { id, name, permissions } = data;
 
   return (
-    <tr>
+    <tr className="text-base text-gray-700">
       <td className="table-row-item">{id}</td>
       <td className="table-row-item w-1/2">{name}</td>
       <td className="table-row-item">{permissions}</td>

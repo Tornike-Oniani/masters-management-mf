@@ -24,7 +24,7 @@ const RolesList = () => {
     <div className="flex flex-wrap p-4 bg-gray-100">
       {roles.map((role) => {
         return (
-          <div className="text-base text-white bg-purple-700 px-3 py-2 rounded mr-2">
+          <div className="text-base text-white bg-cst-lavender-700 px-3 py-2 rounded mr-2">
             {role.name}
           </div>
         );
