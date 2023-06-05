@@ -59,7 +59,10 @@ const OrganizationItem = ({ data }) => {
         <td className="table-row-item">{users}</td>
         <td className="table-row-item">
           <div className="flex items-center justify-start">
-            <NavLink to={`/${id}`} className="action-link mr-2">
+            <NavLink
+              to={`/${data.id}/applications`}
+              className="action-link mr-2"
+            >
               {<BrowseIcon className="fill-gray-500 mr-1" />}
               <span>Browse</span>
             </NavLink>

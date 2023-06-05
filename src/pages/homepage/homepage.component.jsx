@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs.component';
 import Organizations from '../../components/organizations/organizations.component';
@@ -26,13 +26,12 @@ const Homepage = () => {
           <Routes>
             <Route path="/" element={<Organizations setCrumbs={setCrumbs} />} />
             <Route
-              path="/:id"
+              path="/:id/*"
               element={<OrganizationView setCrumbs={setCrumbs} />}
             />
           </Routes>
         </div>
       </div>
-      <Outlet />
     </div>
   );
 };

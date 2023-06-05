@@ -9,6 +9,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/*" element={<Homepage />} />
+      <Route path="/tasks" element={<h1>Tasks</h1>} />
     </Routes>
   );
 };
