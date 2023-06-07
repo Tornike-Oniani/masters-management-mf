@@ -22,7 +22,7 @@ const OrganizationView = ({ setCrumbs }) => {
   }, []);
 
   return (
-    <div className="bg-white rounded shadow-md overflow-auto">
+    <div className="bg-white rounded shadow-md overflow-visible">
       <h3 className="font-semibold text-xl px-4 pt-4 text-gray-600">
         Selected Organization
       </h3>

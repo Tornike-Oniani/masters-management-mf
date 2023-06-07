@@ -5,12 +5,13 @@ import BrowseIcon from '../../assets/folder-open.svg';
 import EditIcon from '../../assets/pencil-icon.svg';
 
 const ApplicationItem = ({ data }) => {
-  const { id, name, permissions } = data;
+  const { id, name, key, permissions } = data;
 
   return (
     <tr className="text-base text-gray-700">
       <td className="table-row-item">{id}</td>
-      <td className="table-row-item w-1/2">{name}</td>
+      <td className="table-row-item w-1/4">{name}</td>
+      <td className="table-row-item w-1/3">{key}</td>
       <td className="table-row-item">{permissions}</td>
       <td className="table-row-item">
         <div className="flex items-center">

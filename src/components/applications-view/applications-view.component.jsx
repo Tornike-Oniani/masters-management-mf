@@ -12,6 +12,7 @@ const ApplicationsView = () => {
   const columns = [
     { accessor: 'id', label: '#' },
     { accessor: 'name', label: 'Name' },
+    { accessor: 'key', label: 'Access key' },
     { accessor: 'permissions', label: 'Permissions' },
     { accessor: 'actions', label: 'Actions' },
   ];
@@ -19,11 +20,13 @@ const ApplicationsView = () => {
     {
       id: 1,
       name: 'Application 1',
+      key: 'hug7eHBkJxBahZLmTQPG1DMZJoX7WMCv',
       permissions: 35,
     },
     {
       id: 2,
       name: 'Application 2',
+      key: 'e3rQCH3FL1nQg5CTLynwiBmaiuw24kG3',
       permissions: 44,
     },
   ];

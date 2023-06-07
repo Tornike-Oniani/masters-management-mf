@@ -19,3 +19,10 @@
     @apply py-1 px-2 border border-gray-500 rounded cursor-pointer flex items-center;
   }
 }
+
+input:checked + div {
+  @apply border-blue-500;
+}
+input:checked + div svg {
+  @apply block;
+}
