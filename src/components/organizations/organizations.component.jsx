@@ -324,7 +324,7 @@ const Organizations = ({ setCrumbs }) => {
           type="text"
           placeholder="Search organization"
           id="searchOrganization"
-          className="text-input mr-3"
+          className="text-input"
           onChange={handleSearch}
         />
       </div>

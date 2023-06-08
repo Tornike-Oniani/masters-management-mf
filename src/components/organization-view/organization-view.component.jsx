@@ -15,7 +15,7 @@ const OrganizationView = ({ setCrumbs }) => {
         label: 'Organizations',
       },
       {
-        path: '/1',
+        path: '/1/applications',
         label: 'Selected Organization',
       },
     ]);
@@ -30,21 +30,33 @@ const OrganizationView = ({ setCrumbs }) => {
         <NavLink
           to={'/' + organizationId + '/applications'}
           className={({ isActive }) =>
-            'text-lg px-6 py-3 border-b-2 border-gray-400 cursor-pointer font-semibold text-cst-text-gray-800' +
-            (isActive ? ' border-cst-lavender-800 text-cst-lavender-800' : '')
+            'text-lg px-6 py-3 border-b-2 cursor-pointer font-semibold' +
+            (isActive
+              ? ' border-cst-lavender-800 text-cst-lavender-800'
+              : ' border-gray-400 text-cst-text-gray-800')
           }
         >
           Applications
         </NavLink>
         <NavLink
           to={'/' + organizationId + '/roles'}
-          className="text-lg px-6 py-3 border-b-2 border-gray-400 cursor-pointer font-semibold text-cst-text-gray-800"
+          className={({ isActive }) =>
+            'text-lg px-6 py-3 border-b-2 cursor-pointer font-semibold' +
+            (isActive
+              ? ' border-cst-lavender-800 text-cst-lavender-800'
+              : ' border-gray-400 text-cst-text-gray-800')
+          }
         >
           Roles
         </NavLink>
         <NavLink
           to={'/' + organizationId + '/users'}
-          className="text-lg px-6 py-3 border-b-2 border-gray-400 cursor-pointer font-semibold text-cst-text-gray-800"
+          className={({ isActive }) =>
+            'text-lg px-6 py-3 border-b-2 cursor-pointer font-semibold' +
+            (isActive
+              ? ' border-cst-lavender-800 text-cst-lavender-800'
+              : ' border-gray-400 text-cst-text-gray-800')
+          }
         >
           Users
         </NavLink>

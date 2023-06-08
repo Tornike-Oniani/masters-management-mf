@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs.component';
 import Organizations from '../../components/organizations/organizations.component';
 import OrganizationView from '../../components/organization-view/organization-view.component';
+import PermissionsView from '../../components/permissions-view/permissions-view.component';
 
 const Homepage = () => {
   const [crumbs, setCrumbs] = useState([]);
@@ -28,6 +29,10 @@ const Homepage = () => {
             <Route
               path="/:id/*"
               element={<OrganizationView setCrumbs={setCrumbs} />}
+            />
+            <Route
+              path="/:id/applications/:id"
+              element={<PermissionsView setCrumbs={setCrumbs} />}
             />
           </Routes>
         </div>
