@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
+import './server/server';
+
 const mount = (el) => {
   const root = createRoot(el);
   root.render(

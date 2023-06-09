@@ -27,11 +27,11 @@ const Homepage = () => {
           <Routes>
             <Route path="/" element={<Organizations setCrumbs={setCrumbs} />} />
             <Route
-              path="/:id/*"
+              path="/:organizationId/*"
               element={<OrganizationView setCrumbs={setCrumbs} />}
             />
             <Route
-              path="/:id/applications/:id"
+              path="/:organizationId/applications/:applicationId"
               element={<PermissionsView setCrumbs={setCrumbs} />}
             />
           </Routes>

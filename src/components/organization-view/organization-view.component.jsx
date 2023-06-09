@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route, NavLink, useParams } from 'react-router-dom';
+
+import { getOrganizationById } from '../../services/organizations';
 
 import ApplicationsView from '../applications-view/applications-view.component';
 import RolesView from '../roles-view/roles-view.component';
 import UsersView from '../users-view/users-view.component';
 
 const OrganizationView = ({ setCrumbs }) => {
-  const organizationId = 1;
+  const params = useParams();
+  const [selectedOrganization, setSelectedOrganization] = useState({});
 
   useEffect(() => {
     setCrumbs([
@@ -19,16 +22,22 @@ const OrganizationView = ({ setCrumbs }) => {
         label: 'Selected Organization',
       },
     ]);
+
+    const getOrganization = async () => {
+      const response = await getOrganizationById(params.organizationId);
+      setSelectedOrganization(response);
+    };
+    getOrganization();
   }, []);
 
   return (
     <div className="bg-white rounded shadow-md overflow-visible">
-      <h3 className="font-semibold text-xl px-4 pt-4 text-gray-600">
-        Selected Organization
+      <h3 className="font-semibold text-xl px-4 py-5 text-gray-600">
+        {selectedOrganization.name}
       </h3>
       <div className="flex items-center">
         <NavLink
-          to={'/' + organizationId + '/applications'}
+          to={'/' + selectedOrganization.id + '/applications'}
           className={({ isActive }) =>
             'text-lg px-6 py-3 border-b-2 cursor-pointer font-semibold' +
             (isActive
@@ -39,7 +48,7 @@ const OrganizationView = ({ setCrumbs }) => {
           Applications
         </NavLink>
         <NavLink
-          to={'/' + organizationId + '/roles'}
+          to={'/' + selectedOrganization.id + '/roles'}
           className={({ isActive }) =>
             'text-lg px-6 py-3 border-b-2 cursor-pointer font-semibold' +
             (isActive
@@ -50,7 +59,7 @@ const OrganizationView = ({ setCrumbs }) => {
           Roles
         </NavLink>
         <NavLink
-          to={'/' + organizationId + '/users'}
+          to={'/' + selectedOrganization.id + '/users'}
           className={({ isActive }) =>
             'text-lg px-6 py-3 border-b-2 cursor-pointer font-semibold' +
             (isActive
@@ -66,7 +75,10 @@ const OrganizationView = ({ setCrumbs }) => {
       </div>
 
       <Routes>
-        <Route path="/applications" element={<ApplicationsView />} />
+        <Route
+          path="/applications"
+          element={<ApplicationsView organization={selectedOrganization} />}
+        />
         <Route path="/roles" element={<RolesView />} />
         <Route path="/users" element={<UsersView />} />
       </Routes>

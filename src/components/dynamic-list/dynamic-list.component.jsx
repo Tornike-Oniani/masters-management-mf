@@ -12,7 +12,13 @@ import BrowseIcon from '../../assets/folder-open.svg';
 import EditIcon from '../../assets/pencil-icon.svg';
 import ArrowDownIcon from '../../assets/arrow-down.svg';
 
-const DynamicList = ({ columns, rows, filter, ItemComponent }) => {
+const DynamicList = ({
+  columns,
+  rows,
+  filter,
+  updateAction,
+  ItemComponent,
+}) => {
   useEffect(() => {
     setActivePage(1);
   }, [filter]);
@@ -79,7 +85,13 @@ const DynamicList = ({ columns, rows, filter, ItemComponent }) => {
           </thead>
           <tbody className="divide-y divide-gray-300">
             {calculatedRows.map((row) => {
-              return <ItemComponent key={row.id} data={row} />;
+              return (
+                <ItemComponent
+                  key={row.id}
+                  data={row}
+                  updateAction={updateAction}
+                />
+              );
             })}
           </tbody>
         </table>

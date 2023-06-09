@@ -6,7 +6,7 @@ import Popup from '../popup/popup.component';
 
 import KeyIcon from '../../assets/key.svg';
 
-const ApplicationsView = () => {
+const ApplicationsView = ({ organization }) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const columns = [
@@ -36,7 +36,7 @@ const ApplicationsView = () => {
       <Popup
         isVisible={isPopupVisible}
         setIsVisible={setIsPopupVisible}
-        title="Add new application"
+        title={'Add new application in "' + organization.name + '"'}
         label="Please fill in all the mandatory fields."
       >
         <div className="flex flex-col">
