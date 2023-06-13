@@ -21,6 +21,7 @@ const devConfig = {
       exposes: {
         './ManagementApp': './src/bootstrap',
       },
+      shared: ['react', 'react-dom'],
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
