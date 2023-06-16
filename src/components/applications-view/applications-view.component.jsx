@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import DynamicList from '../dynamic-list/dynamic-list.component';
 import ApplicationItem from '../application-item/application-item.component';
 import Popup from '../popup/popup.component';
 
+import { getApplications, addApplication } from '../../services/applications';
+
 import KeyIcon from '../../assets/key.svg';
 
 const ApplicationsView = ({ organization }) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [applications, setApplications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [newApplicationName, setNewApplicationName] = useState('');
+  const [newApplicationKey, setNewApplicationKey] = useState('');
+
+  useEffect(() => {
+    const fetchApplications = async () => {
+      setApplications(await getApplications(organization.id));
+      setLoading(false);
+    };
+    fetchApplications();
+  }, []);
 
   const columns = [
     { accessor: 'id', label: '#' },
@@ -16,20 +30,29 @@ const ApplicationsView = ({ organization }) => {
     { accessor: 'permissions', label: 'Permissions' },
     { accessor: 'actions', label: 'Actions' },
   ];
-  const rows = [
-    {
-      id: 1,
-      name: 'Application 1',
-      key: 'hug7eHBkJxBahZLmTQPG1DMZJoX7WMCv',
-      permissions: 35,
-    },
-    {
-      id: 2,
-      name: 'Application 2',
-      key: 'e3rQCH3FL1nQg5CTLynwiBmaiuw24kG3',
-      permissions: 44,
-    },
-  ];
+
+  const updateApplication = (id, name, key) => {
+    const appsCopy = [...applications];
+    const appIndex = appsCopy.findIndex((app) => app.id === id);
+    appsCopy[appIndex].name = name;
+    appsCopy[appIndex].key = key;
+    setApplications(appsCopy);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const response = await addApplication(
+      organization.id,
+      newApplicationName,
+      newApplicationKey
+    );
+
+    setApplications([response, ...applications]);
+    setNewApplicationName('');
+    setNewApplicationKey('');
+    setIsPopupVisible(false);
+  };
 
   return (
     <div className="">
@@ -39,7 +62,7 @@ const ApplicationsView = ({ organization }) => {
         title={'Add new application in "' + organization.name + '"'}
         label="Please fill in all the mandatory fields."
       >
-        <div className="flex flex-col">
+        <form onSubmit={handleSubmit} className="flex flex-col">
           <label htmlFor="name" className="font-base font-semibold mb-1">
             Name*
           </label>
@@ -48,6 +71,8 @@ const ApplicationsView = ({ organization }) => {
             id="name"
             placeholder="Application name"
             className="text-input mb-3"
+            value={newApplicationName}
+            onChange={(event) => setNewApplicationName(event.target.value)}
           />
           <label htmlFor="key" className="font-base font-semibold mb-1">
             Key*
@@ -57,12 +82,20 @@ const ApplicationsView = ({ organization }) => {
             id="key"
             placeholder="Access key"
             className="text-input mb-3"
+            value={newApplicationKey}
+            onChange={(event) => setNewApplicationKey(event.target.value)}
           />
           <div className="flex w-full">
-            <button className="btn-primary flex-1 mr-3">Save</button>
-            <button className="btn-primary flex-1">Cancel</button>
+            <input
+              type="submit"
+              className="btn-primary flex-1 mr-3"
+              value="Save"
+            />
+            <button type="button" className="btn-primary flex-1">
+              Cancel
+            </button>
           </div>
-        </div>
+        </form>
       </Popup>
       <div className="flex items-center justify-between p-4">
         <button className="btn-primary" onClick={() => setIsPopupVisible(true)}>
@@ -76,8 +109,10 @@ const ApplicationsView = ({ organization }) => {
       </div>
       <DynamicList
         columns={columns}
-        rows={rows}
+        rows={applications}
         ItemComponent={ApplicationItem}
+        updateAction={updateApplication}
+        loading={loading}
       />
     </div>
   );

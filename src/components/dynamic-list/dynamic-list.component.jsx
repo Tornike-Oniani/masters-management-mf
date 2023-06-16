@@ -12,6 +12,8 @@ import BrowseIcon from '../../assets/folder-open.svg';
 import EditIcon from '../../assets/pencil-icon.svg';
 import ArrowDownIcon from '../../assets/arrow-down.svg';
 
+import ItemPlaceholder from './item-placeholder/item-placeholder.component';
+
 const DynamicList = ({
   columns,
   rows,

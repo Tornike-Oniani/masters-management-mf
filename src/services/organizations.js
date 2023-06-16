@@ -8,14 +8,18 @@ export async function getOrganizations() {
 }
 
 export async function addOrganization(name) {
-  const response = await axios.post(`${BASE_URL}/organization`, { name });
+  const response = await axios.post(`${BASE_URL}/organization`, {
+    organization: { name, roles: 0, applications: 0, users: 0 },
+  });
 
   return response.data.organization;
 }
 
 export async function updateOrganization(id, name) {
   const response = await axios.patch(`${BASE_URL}/organization/${id}`, {
-    name,
+    organization: {
+      name,
+    },
   });
 
   return response.data.organization;

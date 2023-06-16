@@ -50,7 +50,7 @@ const Organizations = ({ setCrumbs }) => {
 
     const response = await addOrganization(organizationName);
 
-    setOrganizations([...organizations, response]);
+    setOrganizations([response, ...organizations]);
     setOrganizationName('');
     setAddFromIsVisible(false);
   };

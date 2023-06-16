@@ -1,12 +1,25 @@
-import { createServer, Model } from 'miragejs';
+import {
+  createServer,
+  RestSerializer,
+  Model,
+  belongsTo,
+  hasMany,
+} from 'miragejs';
 
 createServer({
+  serializers: { application: RestSerializer },
   models: {
     organization: Model,
+    application: Model.extend({
+      organization: belongsTo(),
+    }),
+    permission: Model.extend({
+      application: belongsTo(),
+    }),
   },
 
   seeds(server) {
-    server.create('organization', {
+    const artsOrg = server.create('organization', {
       name: 'Arts',
       roles: 4,
       applications: 2,
@@ -42,39 +55,96 @@ createServer({
       applications: 5,
       users: 55,
     });
+
+    const prtfApp = server.create('application', {
+      name: 'Portfolio Manager',
+      key: '4tx18BAvTqeqtxbLFsE3JoT8I1NIvBPy',
+      permissions: 8,
+      organization: artsOrg,
+    });
+    server.create('application', {
+      name: 'Reference Browser',
+      key: 'ViAB80v1KVSPmvyfEg857hesRst1IMHl',
+      permissions: 0,
+      organization: artsOrg,
+    });
+
+    server.create('permission', {
+      name: 'Create result',
+      value: 'result_create',
+      application: prtfApp,
+    });
+    server.create('permission', {
+      name: 'Read result',
+      value: 'result_read',
+      application: prtfApp,
+    });
+    server.create('permission', {
+      name: 'Update result',
+      value: 'result_update',
+      application: prtfApp,
+    });
+    server.create('permission', {
+      name: 'Delete result',
+      value: 'result_delete',
+      application: prtfApp,
+    });
   },
 
   routes() {
     this.namespace = 'api';
 
-    this.get('/organization', (schema, request) => {
-      return schema.organizations.all();
+    this.get('/organization');
+    this.get('/organization/:id');
+    this.post('/organization');
+    this.patch('/organization/:id');
+    this.get('/organization/application/:id', (schema, request) => {
+      const organizationId = request.params.id;
+      return schema.applications.where({ organizationId });
     });
-
-    this.get('/organization/:id', (schema, request) => {
-      let id = request.params.id;
-
-      return schema.organizations.find(id);
+    this.post('/organization/application/:id', (schema, request) => {
+      const attr = JSON.parse(request.requestBody);
+      const organizationId = request.params.id;
+      attr.organizationId = organizationId;
+      attr.permissions - 0;
+      return schema.applications.create(attr);
     });
-
-    this.post('/organization', (schema, request) => {
-      let attrs = JSON.parse(request.requestBody);
-
-      return schema.organizations.create(attrs);
-    });
-
-    this.patch('/organization/:id', (schema, request) => {
+    this.patch('/application/:id', (schema, request) => {
       let newAttrs = JSON.parse(request.requestBody);
       let id = request.params.id;
-      let movie = schema.organizations.find(id);
+      let application = schema.applications.find(id);
 
-      return movie.update(newAttrs);
+      return application.update(newAttrs);
     });
 
-    this.delete('/organization/:id', (schema, request) => {
-      let id = request.params.id;
+    // this.get('/organization', (schema, request) => {
+    //   return schema.organizations.all();
+    // });
 
-      return schema.organizations.find(id).destroy();
-    });
+    // this.get('/organization/:id', (schema, request) => {
+    //   let id = request.params.id;
+
+    //   return schema.organizations.find(id);
+    // });
+
+    // this.post('/organization', (schema, request) => {
+    //   let attrs = JSON.parse(request.requestBody);
+
+    //   return schema.organizations.create(attrs);
+    // });
+
+    // this.patch('/organization/:id', (schema, request) => {
+    //   let newAttrs = JSON.parse(request.requestBody);
+    //   let id = request.params.id;
+    //   let movie = schema.organizations.find(id);
+
+    //   return movie.update(newAttrs);
+    // });
+
+    // this.delete('/organization/:id', (schema, request) => {
+    //   let id = request.params.id;
+
+    //   return schema.organizations.find(id).destroy();
+    // });
   },
 });

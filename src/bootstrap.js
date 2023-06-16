@@ -8,9 +8,9 @@ import './server/server';
 const mount = (el) => {
   const root = createRoot(el);
   root.render(
-    <MemoryRouter>
+    <BrowserRouter>
       <App />
-    </MemoryRouter>
+    </BrowserRouter>
   );
 };
 

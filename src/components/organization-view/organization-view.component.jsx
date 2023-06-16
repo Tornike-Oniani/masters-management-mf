@@ -6,10 +6,12 @@ import { getOrganizationById } from '../../services/organizations';
 import ApplicationsView from '../applications-view/applications-view.component';
 import RolesView from '../roles-view/roles-view.component';
 import UsersView from '../users-view/users-view.component';
+import Loader from '../loader/loader.component';
 
-const OrganizationView = ({ setCrumbs }) => {
+const OrganizationView = ({ setCrumbs, organization }) => {
   const params = useParams();
   const [selectedOrganization, setSelectedOrganization] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setCrumbs([
@@ -26,6 +28,7 @@ const OrganizationView = ({ setCrumbs }) => {
     const getOrganization = async () => {
       const response = await getOrganizationById(params.organizationId);
       setSelectedOrganization(response);
+      setLoading(false);
     };
     getOrganization();
   }, []);
@@ -74,14 +77,18 @@ const OrganizationView = ({ setCrumbs }) => {
         </div>
       </div>
 
-      <Routes>
-        <Route
-          path="/applications"
-          element={<ApplicationsView organization={selectedOrganization} />}
-        />
-        <Route path="/roles" element={<RolesView />} />
-        <Route path="/users" element={<UsersView />} />
-      </Routes>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Routes>
+          <Route
+            path="/applications"
+            element={<ApplicationsView organization={selectedOrganization} />}
+          />
+          <Route path="/roles" element={<RolesView />} />
+          <Route path="/users" element={<UsersView />} />
+        </Routes>
+      )}
     </div>
   );
 };

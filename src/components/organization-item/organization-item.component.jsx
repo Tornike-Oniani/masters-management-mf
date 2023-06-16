@@ -17,7 +17,7 @@ const OrganizationItem = ({ data, updateAction }) => {
     setUpdateName(event.target.value);
   };
 
-  const handleUpdate = async (event) => {
+  const handleUpdate = async () => {
     const response = await updateOrganization(id, updateName);
     updateAction(id, updateName);
     setCurName(response.name);
