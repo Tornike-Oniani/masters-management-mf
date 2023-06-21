@@ -7,6 +7,7 @@ import {
 } from '../../services/organizations';
 
 import OrganizationItem from '../../components/organization-item/organization-item.component';
+import OrganizationAddForm from '../organization-item/organization-add-form.component';
 import DynamicList from '../../components/dynamic-list/dynamic-list.component';
 import Loader from '../loader/loader.component';
 
@@ -19,8 +20,6 @@ const Organizations = ({ setCrumbs }) => {
   const [organizations, setOrganizations] = useState([]);
   // Used to display loader while async fetching is being finished
   const [loading, setLoading] = useState(true);
-  // Organization name used for adding new organization
-  const [organizationName, setOrganizationName] = useState('');
 
   useEffect(() => {
     // Set current navigation breadcrumbs
@@ -39,19 +38,11 @@ const Organizations = ({ setCrumbs }) => {
     fetchOrganizations();
   }, []);
 
-  // Handles search of organizations in table
-  const handleSearch = (event) => {
-    setFilter(event.target.value);
-  };
-
   // Handles submit of adding new organization
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const response = await addOrganization(organizationName);
+  const handleCreateOrganization = async (name) => {
+    const response = await addOrganization(name);
 
     setOrganizations([response, ...organizations]);
-    setOrganizationName('');
     setAddFromIsVisible(false);
   };
 
@@ -87,42 +78,13 @@ const Organizations = ({ setCrumbs }) => {
           >
             Add Organization
           </button>
-          <form
-            onSubmit={handleSubmit}
-            className={
-              'flex items-center ' + (addFormIsVisible ? '' : 'hidden')
-            }
-          >
-            <input
-              type="text"
-              className="text-input mr-2"
-              placeholder="Organization name"
-              value={organizationName}
-              onChange={(event) => setOrganizationName(event.target.value)}
-            />
-            <input
-              type="submit"
-              className="btn-primary w-24 mr-2"
-              value="Save"
-            />
-            <button
-              type="button"
-              className="btn-primary w-24"
-              onClick={() => {
-                setOrganizationName('');
-                setAddFromIsVisible(false);
-              }}
-            >
-              Cancel
-            </button>
-          </form>
         </div>
         <input
           type="text"
           placeholder="Search organization"
           id="searchOrganization"
           className="text-input"
-          onChange={handleSearch}
+          onChange={(event) => setFilter(event.target.value)}
         />
       </div>
       {loading ? (
@@ -133,7 +95,11 @@ const Organizations = ({ setCrumbs }) => {
           rows={organizations}
           filter={filter}
           updateAction={updateOrganization}
+          createAction={handleCreateOrganization}
           ItemComponent={OrganizationItem}
+          AddFormComponent={OrganizationAddForm}
+          showAdd={addFormIsVisible}
+          setShowAdd={setAddFromIsVisible}
         />
       )}
     </div>

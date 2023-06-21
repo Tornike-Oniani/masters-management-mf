@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
 
 import {
   filterRows,
@@ -8,18 +7,18 @@ import {
 } from '../../helpers/data-filters.utils';
 
 import Pagination from '../pagination/pagination.component';
-import BrowseIcon from '../../assets/folder-open.svg';
-import EditIcon from '../../assets/pencil-icon.svg';
 import ArrowDownIcon from '../../assets/arrow-down.svg';
-
-import ItemPlaceholder from './item-placeholder/item-placeholder.component';
 
 const DynamicList = ({
   columns,
   rows,
   filter,
   updateAction,
+  createAction,
+  showAdd,
+  setShowAdd,
   ItemComponent,
+  AddFormComponent,
 }) => {
   useEffect(() => {
     setActivePage(1);
@@ -86,6 +85,14 @@ const DynamicList = ({
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-300">
+            {showAdd ? (
+              <AddFormComponent
+                createAction={createAction}
+                setVisibility={setShowAdd}
+              />
+            ) : (
+              ''
+            )}
             {calculatedRows.map((row) => {
               return (
                 <ItemComponent

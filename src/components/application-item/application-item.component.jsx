@@ -51,7 +51,7 @@ const ApplicationItem = ({ data, updateAction }) => {
                 Update
               </button>
               <button
-                className="btn-primary"
+                className="btn-primary w-24"
                 onClick={() => setIsInEditMode(false)}
               >
                 Cancel

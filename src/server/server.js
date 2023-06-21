@@ -98,11 +98,12 @@ createServer({
     this.get('/organization/:id');
     this.post('/organization');
     this.patch('/organization/:id');
-    this.get('/organization/application/:id', (schema, request) => {
+    this.get('/organization/:id/application', (schema, request) => {
       const organizationId = request.params.id;
       return schema.applications.where({ organizationId });
     });
-    this.post('/organization/application/:id', (schema, request) => {
+    this.get('/application/:id');
+    this.post('/organization/:id/application/', (schema, request) => {
       const attr = JSON.parse(request.requestBody);
       const organizationId = request.params.id;
       attr.organizationId = organizationId;
@@ -113,8 +114,23 @@ createServer({
       let newAttrs = JSON.parse(request.requestBody);
       let id = request.params.id;
       let application = schema.applications.find(id);
-
       return application.update(newAttrs);
+    });
+    this.get('/application/:id/permission', (schema, request) => {
+      const appId = request.params.id;
+      return schema.permissions.where({ applicationId: appId });
+    });
+    this.post('/application/:id/permission', (schema, request) => {
+      const appId = request.params.id;
+      const attr = JSON.parse(request.requestBody);
+      attr.applicationId = appId;
+      return schema.permissions.create(attr);
+    });
+    this.patch('/permission/:id', (schema, request) => {
+      const newAttrs = JSON.parse(request.requestBody);
+      const id = request.params.id;
+      const permission = schema.permissions.find(id);
+      return permission.update(newAttrs);
     });
 
     // this.get('/organization', (schema, request) => {
