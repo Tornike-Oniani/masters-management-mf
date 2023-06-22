@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { getApplicationById } from '../../services/applications';
 import {
-  getPermissions,
+  getPermissionsForApplication,
   addPermission,
   updatePermission,
 } from '../../services/permissions';
@@ -26,7 +26,7 @@ const PermissionsView = ({ setCrumbs, application }) => {
     const fetchPermissions = async () => {
       const app = await getApplicationById(params.applicationId);
       setSelectedApplication(app);
-      setPermissions(await getPermissions(app.id));
+      setPermissions(await getPermissionsForApplication(app.id));
       setCrumbs([
         {
           path: '/',

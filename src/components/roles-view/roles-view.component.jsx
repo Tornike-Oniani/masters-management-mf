@@ -1,205 +1,99 @@
 import React, { useState, useEffect } from 'react';
 
-import RolesList from '../roles-list/roles-list.component';
+import { getRoles } from '../../services/roles';
+import { getAllPermissions } from '../../services/permissions';
+import { getApplications } from '../../services/applications';
+
 import RolePermissionItem from '../role-permission-item/role-permission-item.component';
 
-const RolesView = () => {
-  const applications = [
-    {
-      id: 1,
-      name: 'Application 1',
-      permissions: [
-        {
-          id: 1,
-          name: 'Create article',
-          value: 'article_create',
-        },
-        {
-          id: 2,
-          name: 'Read article',
-          value: 'article_read',
-        },
-        {
-          id: 3,
-          name: 'Update article',
-          value: 'article_update',
-        },
-        {
-          id: 4,
-          name: 'Delete article',
-          value: 'article_delete',
-        },
-        {
-          id: 5,
-          name: 'Create bookmark',
-          value: 'article_bookmark',
-        },
-        {
-          id: 6,
-          name: 'Read bookmark',
-          value: 'bookmark_read',
-        },
-        {
-          id: 7,
-          name: 'Update bookmark',
-          value: 'bookmark_update',
-        },
-        {
-          id: 8,
-          name: 'Delete bookmark',
-          value: 'bookmark_delete',
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Application 2',
-      permissions: [
-        {
-          id: 1,
-          name: 'Create product',
-          value: 'product_create',
-        },
-        {
-          id: 2,
-          name: 'Read product',
-          value: 'product_read',
-        },
-        {
-          id: 3,
-          name: 'Update product',
-          value: 'product_update',
-        },
-        {
-          id: 4,
-          name: 'Delete product',
-          value: 'product_delete',
-        },
-        {
-          id: 5,
-          name: 'Create advertise',
-          value: 'article_advertise',
-        },
-        {
-          id: 6,
-          name: 'Read advertise',
-          value: 'advertise_read',
-        },
-        {
-          id: 7,
-          name: 'Update advertise',
-          value: 'advertise_update',
-        },
-        {
-          id: 8,
-          name: 'Delete advertise',
-          value: 'advertise_delete',
-        },
-      ],
-    },
-  ];
-  const roles = [
-    {
-      id: 1,
-      name: 'Teacher',
-      permissions: {
-        'Application 1': [
-          {
-            id: 1,
-            name: 'Create article',
-            value: 'article_create',
-          },
-          {
-            id: 2,
-            name: 'Read article',
-            value: 'article_read',
-          },
-          {
-            id: 3,
-            name: 'Read bookmark',
-            value: 'bookmark_read',
-          },
-        ],
-        'Application 2': [
-          {
-            id: 4,
-            name: 'Create product',
-            value: 'product_create',
-          },
-          {
-            id: 5,
-            name: 'Read product',
-            value: 'product_read',
-          },
-          {
-            id: 6,
-            name: 'Update product',
-            value: 'product_update',
-          },
-          {
-            id: 7,
-            name: 'Delete product',
-            value: 'product_delete',
-          },
-        ],
-      },
-    },
-    {
-      id: 2,
-      name: 'Manager',
-      permissions: {
-        'Application 1': [
-          {
-            id: 2,
-            name: 'Read article',
-            value: 'article_read',
-          },
-          {
-            id: 3,
-            name: 'Read bookmark',
-            value: 'bookmark_read',
-          },
-          {
-            id: 15,
-            name: 'Update bookmark',
-            value: 'bookmark_update',
-          },
-        ],
-        'Application 2': [
-          {
-            id: 4,
-            name: 'Create product',
-            value: 'product_create',
-          },
-          {
-            id: 5,
-            name: 'Read product',
-            value: 'product_read',
-          },
-          {
-            id: 6,
-            name: 'Update product',
-            value: 'product_update',
-          },
-          {
-            id: 7,
-            name: 'Delete product',
-            value: 'product_delete',
-          },
-        ],
-      },
-    },
-  ];
+const RolesView = ({ organization }) => {
+  const [roles, setRoles] = useState([]);
+  const [applications, setApplications] = useState([]);
+  const [selectedApplication, setSelectedApplication] = useState('');
+  const [permissions, setPermissions] = useState([]);
+  const [selectedRole, setSelectedRole] = useState({});
+  const [selectedPermissions, setSelectedPermissions] = useState([]);
+  const [filter, setFilter] = useState('');
 
-  const [selectedRole, setSelectedRole] = useState(roles[0]);
-  const [selectedApplication, setSelectedApplication] = useState(
-    applications[0]
+  const rolePermissions = permissions.map((p) => {
+    return {
+      ...p,
+      assigned: selectedPermissions.some((p1) => p1 === p.id),
+    };
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fRoles = await getRoles(organization.id);
+      const apps = await getApplications(organization.id);
+      const fApplications = [
+        {
+          id: '-1',
+          name: 'All',
+        },
+        ...apps.map((app) => {
+          return {
+            id: app.id,
+            name: app.name,
+          };
+        }),
+      ];
+      setRoles(fRoles);
+      setSelectedRole(fRoles[0]);
+      setSelectedPermissions([...fRoles[0].permissions]);
+      setApplications(fApplications);
+      setSelectedApplication(fApplications[0]);
+      setPermissions(await getAllPermissions());
+    };
+    fetchData();
+  }, []);
+
+  const handleSelectRole = (event) => {
+    const id = event.target.getAttribute('role-id');
+    setSelectedRole(roles[roles.findIndex((r) => r.id === id)]);
+    setSelectedPermissions(
+      roles[roles.findIndex((r) => r.id === id)].permissions
+    );
+    console.log(rolePermissions);
+  };
+
+  const handleSelectApplication = (event) => {
+    const index = applications.findIndex(
+      (app) => app.id === event.target.value
+    );
+    setSelectedApplication(applications[index]);
+  };
+
+  const handleAssign = (id, checked) => {
+    if (checked) {
+      setSelectedPermissions([id, ...selectedPermissions]);
+    } else {
+      const index = selectedPermissions.findIndex((p) => p === id);
+      const arrCopy = [...selectedPermissions];
+      arrCopy.splice(index, 1);
+      setSelectedPermissions(arrCopy);
+    }
+  };
+
+  const handleSearch = (event) => {
+    setFilter(event.target.value);
+  };
+
+  const scopedRolePermissions = rolePermissions.filter((permission) => {
+    if (selectedApplication.name === 'All') {
+      return true;
+    }
+
+    return permission.application.name === selectedApplication.name;
+  });
+  const filteredRolePermissions = rolePermissions.filter((permission) =>
+    permission.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
   );
 
   return (
     <div>
       <div className="flex">
-        <div className="flex flex-col bg-gray-100 min-h-screen p-4">
+        <div className="flex flex-col bg-gray-100 p-4">
           <input
             type="text"
             placeholder="Search role"
@@ -209,11 +103,12 @@ const RolesView = () => {
             return (
               <div
                 key={role.name}
+                role-id={role.id}
                 className={
                   'px-3 py-3 hover:bg-gray-200 cursor-pointer rounded' +
                   (selectedRole.name === role.name ? ' bg-gray-200' : '')
                 }
-                onClick={() => setSelectedRole(role)}
+                onClick={handleSelectRole}
               >
                 {role.name}
               </div>
@@ -221,7 +116,7 @@ const RolesView = () => {
           })}
         </div>
         <div className="w-full flex flex-col p-4">
-          <div className="flex items-center">
+          <div className="flex justify-between items-center p-3">
             <div className="flex items-center">
               <span className="text-base font-semibold block mr-3">
                 View permissions for:{' '}
@@ -230,16 +125,23 @@ const RolesView = () => {
                 name="applications"
                 id="applications"
                 className="px-3 py-2 border border-gray-500 bg-white rounded"
+                onChange={handleSelectApplication}
               >
                 {applications.map((app) => {
                   return (
-                    <option value={app.name} key={app.id}>
+                    <option value={app.id} key={app.id}>
                       {app.name}
                     </option>
                   );
                 })}
               </select>
             </div>
+            <input
+              type="text"
+              className="text-input"
+              placeholder="Search permission"
+              onChange={handleSearch}
+            />
           </div>
           <div className="">
             <table className="w-full">
@@ -252,16 +154,16 @@ const RolesView = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-300">
-                {selectedApplication.permissions.map((permission) => {
+                {scopedRolePermissions.map((permission) => {
                   return (
                     <RolePermissionItem
                       key={permission.id}
+                      id={permission.id}
                       name={permission.name}
                       value={permission.value}
-                      application={selectedApplication.name}
-                      assigned={selectedRole.permissions[
-                        selectedApplication.name
-                      ].find((p) => p.name === permission.name)}
+                      application={permission.application.name}
+                      assigned={permission.assigned}
+                      assignAction={handleAssign}
                     />
                   );
                 })}

@@ -85,7 +85,10 @@ const OrganizationView = ({ setCrumbs, organization }) => {
             path="/applications"
             element={<ApplicationsView organization={selectedOrganization} />}
           />
-          <Route path="/roles" element={<RolesView />} />
+          <Route
+            path="/roles"
+            element={<RolesView organization={selectedOrganization} />}
+          />
           <Route path="/users" element={<UsersView />} />
         </Routes>
       )}

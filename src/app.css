@@ -27,7 +27,7 @@
 }
 
 input:checked + div {
-  @apply border-blue-500;
+  @apply border-cst-cyan-800;
 }
 input:checked + div svg {
   @apply block;

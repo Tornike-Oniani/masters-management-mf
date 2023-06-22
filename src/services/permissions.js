@@ -2,10 +2,15 @@ import axios from 'axios';
 
 import { BASE_URL } from './config';
 
-export async function getPermissions(appId) {
+export async function getPermissionsForApplication(appId) {
   const response = await axios.get(
     `${BASE_URL}/application/${appId}/permission`
   );
+  return response.data.permissions;
+}
+
+export async function getAllPermissions() {
+  const response = await axios.get(`${BASE_URL}/permission`);
   return response.data.permissions;
 }
 

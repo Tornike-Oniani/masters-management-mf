@@ -7,7 +7,13 @@ import {
 } from 'miragejs';
 
 createServer({
-  serializers: { application: RestSerializer },
+  serializers: {
+    application: RestSerializer,
+    permission: RestSerializer.extend({
+      include: ['application'],
+      embed: true,
+    }),
+  },
   models: {
     organization: Model,
     application: Model.extend({
@@ -15,6 +21,10 @@ createServer({
     }),
     permission: Model.extend({
       application: belongsTo(),
+    }),
+    role: Model.extend({
+      organization: belongsTo(),
+      permissions: hasMany('permission'),
     }),
   },
 
@@ -62,42 +72,76 @@ createServer({
       permissions: 8,
       organization: artsOrg,
     });
-    server.create('application', {
+    const refApp = server.create('application', {
       name: 'Reference Browser',
       key: 'ViAB80v1KVSPmvyfEg857hesRst1IMHl',
       permissions: 0,
       organization: artsOrg,
     });
 
-    server.create('permission', {
+    const cr = server.create('permission', {
       name: 'Create result',
       value: 'result_create',
       application: prtfApp,
     });
-    server.create('permission', {
+    const rr = server.create('permission', {
       name: 'Read result',
       value: 'result_read',
       application: prtfApp,
     });
-    server.create('permission', {
+    const ur = server.create('permission', {
       name: 'Update result',
       value: 'result_update',
       application: prtfApp,
     });
-    server.create('permission', {
+    const dr = server.create('permission', {
       name: 'Delete result',
       value: 'result_delete',
       application: prtfApp,
+    });
+    const cref = server.create('permission', {
+      name: 'Create reference',
+      value: 'reference_create',
+      application: refApp,
+    });
+    const rref = server.create('permission', {
+      name: 'Read reference',
+      value: 'reference_read',
+      application: refApp,
+    });
+    const uref = server.create('permission', {
+      name: 'Update reference',
+      value: 'reference_update',
+      application: refApp,
+    });
+    const dref = server.create('permission', {
+      name: 'Delete reference',
+      value: 'reference_delete',
+      application: refApp,
+    });
+
+    server.create('role', {
+      name: 'Teacher',
+      organization: artsOrg,
+      permissions: [rr, rref],
+    });
+    server.create('role', {
+      name: 'Manager',
+      organization: artsOrg,
+      permissions: [cr, rr, ur, rref, cref],
     });
   },
 
   routes() {
     this.namespace = 'api';
 
+    // Organization
     this.get('/organization');
     this.get('/organization/:id');
     this.post('/organization');
     this.patch('/organization/:id');
+
+    // Application
     this.get('/organization/:id/application', (schema, request) => {
       const organizationId = request.params.id;
       return schema.applications.where({ organizationId });
@@ -116,6 +160,8 @@ createServer({
       let application = schema.applications.find(id);
       return application.update(newAttrs);
     });
+
+    // Permission
     this.get('/application/:id/permission', (schema, request) => {
       const appId = request.params.id;
       return schema.permissions.where({ applicationId: appId });
@@ -131,6 +177,16 @@ createServer({
       const id = request.params.id;
       const permission = schema.permissions.find(id);
       return permission.update(newAttrs);
+    });
+    this.get('/permission', (schema, request) => {
+      const permissions = schema.permissions.all();
+      return schema.permissions.all();
+    });
+
+    // Role
+    this.get('/organization/:id/role', (schema, request) => {
+      const organizationId = request.params.id;
+      return schema.roles.where({ organizationId });
     });
 
     // this.get('/organization', (schema, request) => {

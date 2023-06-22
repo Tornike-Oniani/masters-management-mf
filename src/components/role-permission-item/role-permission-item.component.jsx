@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const RolePermissionItem = ({ name, value, application, assigned }) => {
-  const [isChecked, setIsChecked] = useState(assigned);
+import StyledCheckbox from '../styled-checkbox/styled-checkbox.component';
 
+const RolePermissionItem = ({
+  id,
+  name,
+  value,
+  application,
+  assigned,
+  assignAction,
+}) => {
   const handleCheck = (event) => {
-    setIsChecked(!isChecked);
+    assignAction(id, event.target.checked);
   };
 
   return (
@@ -13,7 +20,13 @@ const RolePermissionItem = ({ name, value, application, assigned }) => {
       <td className="border-r border-gray-300 p-3">{value}</td>
       <td className="border-r border-gray-300 p-3">{application}</td>
       <td className="p-3">
-        <input type="checkbox" checked={isChecked} onChange={handleCheck} />
+        {/*<input type="checkbox" checked={assigned} onChange={handleCheck} />*/}
+        <StyledCheckbox
+          id={id}
+          name=""
+          checked={assigned}
+          onChange={handleCheck}
+        />
       </td>
     </tr>
   );
