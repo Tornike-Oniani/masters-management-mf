@@ -6,6 +6,11 @@ const commonConfig = require('./webpack.common');
 
 const devConfig = {
   mode: 'development',
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: 'http://localhost:8081/',
+    filename: 'bundle.js',
+  },
   devtool: 'inline-source-map',
   devServer: {
     port: 8081,

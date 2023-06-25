@@ -43,11 +43,14 @@ const OrganizationItem = ({ data, updateAction }) => {
           <td className="table-row-item">{users}</td>
           <td className="table-row-item">
             <div className="flex items-center justify-start">
-              <button className="btn-primary w-24 mr-2" onClick={handleUpdate}>
+              <button
+                className="btn-primary-small w-24 mr-2"
+                onClick={handleUpdate}
+              >
                 Update
               </button>
               <button
-                className="btn-primary w-24"
+                className="btn-primary-small w-24"
                 onClick={() => setIsInEditMode(false)}
               >
                 Cancel
