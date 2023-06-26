@@ -20,14 +20,14 @@ const devConfig = {
     },
   },
   plugins: [
-    new ModuleFederationPlugin({
-      name: 'management',
-      filename: 'remoteEntry.js',
-      exposes: {
-        './ManagementApp': './src/bootstrap',
-      },
-      shared: ['react', 'react-dom'],
-    }),
+    // new ModuleFederationPlugin({
+    //   name: 'management',
+    //   filename: 'remoteEntry.js',
+    //   exposes: {
+    //     './ManagementApp': './src/bootstrap',
+    //   },
+    //   shared: ['react', 'react-dom'],
+    // }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       publicPath: 'auto',

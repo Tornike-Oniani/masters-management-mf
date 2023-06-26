@@ -113,6 +113,25 @@ const DynamicList = ({
         setActivePage={setActivePage}
         setRowsPerPage={setRowsPerPage}
       />
+      <div className="block md:hidden p-4">
+        {showAdd ? (
+          <AddFormComponent
+            createAction={createAction}
+            setVisibility={setShowAdd}
+          />
+        ) : (
+          ''
+        )}
+        {calculatedRows.map((row) => {
+          return (
+            <ItemComponent
+              key={row.id}
+              data={row}
+              updateAction={updateAction}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

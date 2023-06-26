@@ -12,7 +12,7 @@ const Homepage = () => {
   return (
     // Gray background
     <div className="w-full min-h-screen max-h-full bg-cst-gray-800">
-      <div className="w-4/5 m-auto">
+      <div className=" w-full lg:w-11/12 xl:w-4/5 m-auto">
         {/* Header with title, breadcrumbs, search, add */}
         <div className="flex justify-between py-8">
           {/* Title & breadcrumbs */}

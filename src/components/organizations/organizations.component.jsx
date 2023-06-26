@@ -8,6 +8,7 @@ import {
 
 import OrganizationItem from '../../components/organization-item/organization-item.component';
 import OrganizationAddForm from '../organization-item/organization-add-form.component';
+import OrganizationItemVertical from '../organization-item/organization-item-vertical.component';
 import DynamicList from '../../components/dynamic-list/dynamic-list.component';
 import Loader from '../loader/loader.component';
 
@@ -68,17 +69,18 @@ const Organizations = ({ setCrumbs }) => {
       <h3 className="font-semibold text-xl px-4 py-5 text-gray-600">
         Available Organizations
       </h3>
-      <div className="flex justify-between p-4">
-        <div className="">
-          <button
-            className={'btn-primary ' + (addFormIsVisible ? 'hidden' : '')}
-            onClick={() => {
-              setAddFromIsVisible(true);
-            }}
-          >
-            Add Organization
-          </button>
-        </div>
+      <div className="flex flex-col p-4 sm:flex-row sm:justify-between">
+        <button
+          className={
+            'btn-primary mb-3 sm:mb-0 ' + (addFormIsVisible ? 'hidden' : '')
+          }
+          onClick={() => {
+            setAddFromIsVisible(true);
+          }}
+        >
+          Add Organization
+        </button>
+
         <input
           type="text"
           placeholder="Search organization"
@@ -98,6 +100,7 @@ const Organizations = ({ setCrumbs }) => {
           createAction={handleCreateOrganization}
           ItemComponent={OrganizationItem}
           AddFormComponent={OrganizationAddForm}
+          ItemVerticalComponent={OrganizationItemVertical}
           showAdd={addFormIsVisible}
           setShowAdd={setAddFromIsVisible}
         />

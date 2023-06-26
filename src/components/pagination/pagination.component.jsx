@@ -22,8 +22,8 @@ const Pagination = ({
   let end = activePage === totalPages ? count : beginning + rowsPerPage - 1;
 
   return (
-    <div className="flex justify-between items-center p-4 pr-6">
-      <div className="flex items-center">
+    <div className="flex flex-col p-2 pr-6 sm:py-4 sm:flex-row sm:justify-between sm:items-center">
+      <div className="flex items-center mb-3 sm:mb-0">
         <span className="block mr-2 text-gray-600">Rows per page:</span>
         <input
           type="number"
