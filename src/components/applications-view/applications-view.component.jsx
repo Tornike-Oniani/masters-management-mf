@@ -44,15 +44,15 @@ const ApplicationsView = ({ organization }) => {
 
   return (
     <div className="">
-      <div className="flex items-center justify-between p-4">
-        <div className="">
-          <button
-            className={'btn-primary ' + (showCreateForm ? 'hidden' : '')}
-            onClick={() => setShowCreateForm(true)}
-          >
-            Add new Application
-          </button>
-        </div>
+      <div className="flex flex-col p-4 sm:flex-row sm:justify-between">
+        <button
+          className={
+            'btn-primary mb-3 sm:mb-0' + (showCreateForm ? 'hidden' : '')
+          }
+          onClick={() => setShowCreateForm(true)}
+        >
+          Add new Application
+        </button>
         <input
           type="text"
           className="text-input"
@@ -65,6 +65,7 @@ const ApplicationsView = ({ organization }) => {
         columns={columns}
         rows={applications}
         filter={filter}
+        filterBy="name"
         showAdd={showCreateForm}
         setShowAdd={setShowCreateForm}
         ItemComponent={ApplicationItem}

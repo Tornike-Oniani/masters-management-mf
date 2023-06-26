@@ -96,6 +96,7 @@ const Organizations = ({ setCrumbs }) => {
           columns={columns}
           rows={organizations}
           filter={filter}
+          filterBy="name"
           updateAction={updateOrganization}
           createAction={handleCreateOrganization}
           ItemComponent={OrganizationItem}

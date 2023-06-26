@@ -8,26 +8,25 @@ import RolesView from '../roles-view/roles-view.component';
 import UsersView from '../users-view/users-view.component';
 import Loader from '../loader/loader.component';
 
-const OrganizationView = ({ setCrumbs, organization }) => {
+const OrganizationView = ({ setCrumbs }) => {
   const params = useParams();
   const [selectedOrganization, setSelectedOrganization] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setCrumbs([
-      {
-        path: '/',
-        label: 'Organizations',
-      },
-      {
-        path: '/1/applications',
-        label: 'Selected Organization',
-      },
-    ]);
-
     const getOrganization = async () => {
       const response = await getOrganizationById(params.organizationId);
       setSelectedOrganization(response);
+      setCrumbs([
+        {
+          path: '/',
+          label: 'Organizations',
+        },
+        {
+          path: '/1/applications',
+          label: response.name,
+        },
+      ]);
       setLoading(false);
     };
     getOrganization();

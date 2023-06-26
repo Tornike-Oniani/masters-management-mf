@@ -16,7 +16,7 @@
     @apply appearance-none border border-gray-400 rounded py-1 px-2 text-cst-text-gray-800 focus:outline-none focus:border-gray-500;
   }
   .table-row-item {
-    @apply py-3 px-5 whitespace-nowrap;
+    @apply py-3 px-5;
   }
   .table-header-item {
     @apply py-3 px-5 text-base font-semibold tracking-wide text-left text-cst-text-gray-800;

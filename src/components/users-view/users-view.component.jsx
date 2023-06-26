@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 
 import DynamicList from '../dynamic-list/dynamic-list.component';
 import UserItem from '../user-item/user-item.component';
-import Popup from '../popup/popup.component';
+import UserAddForm from '../user-item/user-add-form.component';
 
 const UsersView = () => {
-  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [filter, setFilter] = useState('');
+  const [addFormIsVisible, setAddFormIsVisible] = useState(false);
 
   const columns = [
     { accessor: 'id', label: '#' },
@@ -116,55 +117,39 @@ const UsersView = () => {
     },
   ];
 
+  const handleCreateUser = async (firstName, lastName, email) => {
+    console.log(firstName, lastName, email);
+  };
+
   return (
     <div className="">
-      <Popup
-        isVisible={isPopupVisible}
-        setIsVisible={setIsPopupVisible}
-        title="Add new user"
-        label="Please fill in all the mandatory fields."
-      >
-        <div className="flex flex-col">
-          <label htmlFor="first_name" className="font-base font-semibold mb-1">
-            First name*
-          </label>
-          <input
-            type="text"
-            id="first_name"
-            className="text-input mb-3"
-            placeholder="John"
-          />
-          <label htmlFor="last_name" className="font-base font-semibold mr-1">
-            Last name*
-          </label>
-          <input
-            type="text"
-            id="first_name"
-            className="text-input mb-3"
-            placeholder="Doe"
-          />
-          <label htmlFor="first_name" className="font-base font-semibold mb-1">
-            Email*
-          </label>
-          <input
-            type="email"
-            id="first_name"
-            className="text-input mb-3"
-            placeholder="example@gmail.com"
-          />
-          <div className="flex w-full">
-            <button className="btn-primary flex-1 mr-3">Save</button>
-            <button className="btn-primary flex-1">Cancel</button>
-          </div>
-        </div>
-      </Popup>
-      <div className="flex items-center justify-between p-4">
-        <button className="btn-primary" onClick={() => setIsPopupVisible(true)}>
+      <div className="flex flex-col p-4 sm:flex-row sm:justify-between">
+        <button
+          className={
+            'btn-primary mb-3 sm:mb-0 ' + (addFormIsVisible ? 'hidden' : '')
+          }
+          onClick={() => setAddFormIsVisible(true)}
+        >
           Add new User
         </button>
-        <input type="text" placeholder="Search users" className="text-input" />
+        <input
+          type="text"
+          placeholder="Search users"
+          className="text-input"
+          onChange={(event) => setFilter(event.target.value)}
+        />
       </div>
-      <DynamicList columns={columns} rows={rows} ItemComponent={UserItem} />
+      <DynamicList
+        columns={columns}
+        rows={rows}
+        filter={filter}
+        filterBy="firstName"
+        createAction={handleCreateUser}
+        ItemComponent={UserItem}
+        AddFormComponent={UserAddForm}
+        showAdd={addFormIsVisible}
+        setShowAdd={setAddFormIsVisible}
+      />
     </div>
   );
 };

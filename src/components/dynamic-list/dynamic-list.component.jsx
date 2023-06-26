@@ -13,6 +13,7 @@ const DynamicList = ({
   columns,
   rows,
   filter,
+  filterBy,
   updateAction,
   createAction,
   showAdd,
@@ -28,7 +29,7 @@ const DynamicList = ({
   const [rowsPerPage, setRowsPerPage] = useState(4);
   const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' });
 
-  const filteredRows = filterRows(rows, filter);
+  const filteredRows = filterRows(rows, filter, filterBy);
   const sortedRows = sortRows(filteredRows, sort);
   const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage);
 

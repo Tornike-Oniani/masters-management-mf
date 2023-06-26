@@ -9,8 +9,6 @@ import {
 } from '../../services/permissions';
 
 import PermissionItem from '../permission-item/permission-item.component';
-import Loader from '../loader/loader.component';
-import EditIcon from '../../assets/pencil-icon.svg';
 
 const PermissionsView = ({ setCrumbs, application }) => {
   const params = useParams();

@@ -1,8 +1,8 @@
-export function filterRows(rows, filter) {
+export function filterRows(rows, filter, filterBy) {
   if (!filter) return rows;
 
   return rows.filter((row) => {
-    return row.name.toLowerCase().includes(filter.toLowerCase());
+    return row[filterBy].toLowerCase().includes(filter.toLowerCase());
   });
 }
 
