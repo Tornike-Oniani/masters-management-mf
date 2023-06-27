@@ -49,9 +49,9 @@ const DynamicList = ({
 
   return (
     <div>
-      <div className="hidden md:block">
-        <table className="w-full border-b border-gray-300">
-          <thead className="bg-gray-100">
+      <div className="m-4 md:m-0">
+        <table className="w-full">
+          <thead className="bg-gray-100 hidden md:table-header-group">
             <tr>
               {columns.map((column) => {
                 if (column.accessor === 'actions') {
@@ -85,7 +85,7 @@ const DynamicList = ({
               })}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-300">
+          <tbody className="flex flex-wrap gap-3 [&>*]:flex-grow md:table-row-group">
             {showAdd ? (
               <AddFormComponent
                 createAction={createAction}
@@ -114,25 +114,6 @@ const DynamicList = ({
         setActivePage={setActivePage}
         setRowsPerPage={setRowsPerPage}
       />
-      <div className="block md:hidden p-4">
-        {showAdd ? (
-          <AddFormComponent
-            createAction={createAction}
-            setVisibility={setShowAdd}
-          />
-        ) : (
-          ''
-        )}
-        {calculatedRows.map((row) => {
-          return (
-            <ItemComponent
-              key={row.id}
-              data={row}
-              updateAction={updateAction}
-            />
-          );
-        })}
-      </div>
     </div>
   );
 };

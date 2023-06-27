@@ -10,51 +10,18 @@ const ApplicationAddForm = ({ createAction, setVisibility }) => {
   };
 
   return (
-    <>
-      <tr className="hidden md:table-row">
-        <td className="table-row-item">&nbsp;</td>
-        <td className="table-row-item w-1/4">
-          <input
-            type="text"
-            placeholder="Application name"
-            className="text-input w-full"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          />
-        </td>
-        <td className="table-row-item w-1/3">
-          <input
-            type="text"
-            placeholder="Access key"
-            className="text-input w-full"
-            value={key}
-            onChange={(event) => setKey(event.target.value)}
-          />
-        </td>
-        <td className="table-row-item">&nbsp;</td>
-        <td className="table-row-item">
-          <div className="flex items-center">
-            <button className="btn-primary-small mr-2" onClick={handleCreate}>
-              Create
-            </button>
-            <button
-              className="btn-primary-small"
-              onClick={() => setVisibility(false)}
-            >
-              Cancel
-            </button>
-          </div>
-        </td>
-      </tr>
-
-      <div className="flex flex-col p-3 border border-gray-400 rounded mb-3 md:hidden">
+    <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:m-0 md:border-b md:rounded-none md:p-0 md:table-row">
+      <td className="table-row-item hidden md:table-cell">&nbsp;</td>
+      <td className="mb-3 md:m-0 md:table-row-item md:w-1/4">
         <input
           type="text"
           placeholder="Application name"
-          className="text-input w-full mb-3"
+          className="text-input w-full"
           value={name}
           onChange={(event) => setName(event.target.value)}
         />
+      </td>
+      <td className="mb-3 md:m-0 md:table-row-item md:w-1/3">
         <input
           type="text"
           placeholder="Access key"
@@ -62,19 +29,22 @@ const ApplicationAddForm = ({ createAction, setVisibility }) => {
           value={key}
           onChange={(event) => setKey(event.target.value)}
         />
-        <div className="flex items-center justify-start mt-3">
-          <button className="btn-primary mr-2" onClick={handleCreate}>
+      </td>
+      <td className="md:table-row-item hidden md:table-cell">&nbsp;</td>
+      <td className="md:table-row-item">
+        <div className="flex items-center">
+          <button className="btn-primary-small mr-2" onClick={handleCreate}>
             Create
           </button>
           <button
-            className="btn-primary w-24"
+            className="btn-primary-small"
             onClick={() => setVisibility(false)}
           >
             Cancel
           </button>
         </div>
-      </div>
-    </>
+      </td>
+    </tr>
   );
 };
 

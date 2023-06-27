@@ -58,104 +58,49 @@ const UserItem = ({ data }) => {
   const renderMode = () => {
     if (displayMode === 'edit') {
       return (
-        <>
-          <tr className="text-base text-gray-700 hidden md:table-row">
-            <td className="table-row-item">{id}</td>
-            <td className="table-row-item w-1/4">
-              <input
-                type="text"
-                value={firstNameTextInput}
-                onChange={handleChange}
-                className="text-input w-full"
-                name="first_name"
-              />
-            </td>
-            <td className="table-row-item w-1/4">
-              <input
-                type="text"
-                value={lastNameTextInput}
-                onChange={handleChange}
-                className="text-input w-full"
-                name="last_name"
-              />
-            </td>
-            <td className="table-row-item w-1/4">
-              <input
-                type="email"
-                value={emailTextInput}
-                onChange={handleChange}
-                className="text-input w-full"
-                name="email"
-              />
-            </td>
-            <td className="table-row-item w-1/4">{renderRoles(roles)}</td>
-            <td className="table-row-item">
-              <div className="flex items-center justify-start">
-                <button
-                  className="btn-primary-small mr-2"
-                  onClick={() => setDisplayMode('default')}
-                >
-                  Save
-                </button>
-                <button
-                  className="btn-primary-small"
-                  onClick={() => setDisplayMode('default')}
-                >
-                  Cancel
-                </button>
-              </div>
-            </td>
-          </tr>
-
-          <div className="flex flex-col p-3 border border-gray-400 rounded mb-3 md:hidden">
-            <label
-              htmlFor="new_first-name"
-              className="text-cst-text-gray-800 font-semibold text-base mb-1"
-            >
+        <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:table-row">
+          <td className="hidden md:table-cell md:table-row-item">{id}</td>
+          <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+            <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
               First name:
-            </label>
+            </span>
             <input
-              id="new_first-name"
               type="text"
               value={firstNameTextInput}
               onChange={handleChange}
-              className="text-input w-full mb-3"
+              className="text-input w-full"
               name="first_name"
             />
-            <label
-              htmlFor="new_last-name"
-              className="text-cst-text-gray-800 font-semibold text-base mb-1"
-            >
+          </td>
+          <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+            <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
               Last name:
-            </label>
+            </span>
             <input
-              id="new_last-name"
               type="text"
               value={lastNameTextInput}
               onChange={handleChange}
-              className="text-input w-full mb-3"
+              className="text-input w-full"
               name="last_name"
             />
-            <label
-              htmlFor="new_email"
-              className="text-cst-text-gray-800 font-semibold text-base mb-1"
-            >
+          </td>
+          <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+            <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
               Email:
-            </label>
+            </span>
             <input
-              id="new_email"
               type="email"
               value={emailTextInput}
               onChange={handleChange}
               className="text-input w-full"
               name="email"
             />
-            <div className="flex items-center">
-              <span>Roles:</span>
-              <span>{renderRoles(roles)}</span>
-            </div>
-            <div className="flex items-center justify-start mt-3">
-              {' '}
+          </td>
+          <td className="hidden md:table-cell md:table-row-item md:w-1/4">
+            {renderRoles(roles)}
+          </td>
+          <td className="md:table-row-item">
+            <div className="flex items-center justify-start">
               <button
                 className="btn-primary-small mr-2"
                 onClick={() => setDisplayMode('default')}
@@ -169,116 +114,90 @@ const UserItem = ({ data }) => {
                 Cancel
               </button>
             </div>
-          </div>
-        </>
+          </td>
+        </tr>
       );
     }
 
     if (displayMode === 'roleManagement') {
       return (
-        <>
-          <tr className="text-base text-gray-700 hidden md:table-row">
-            <td className="table-row-item">{id}</td>
-            <td className="table-row-item w-1/4">{firstName}</td>
-            <td className="table-row-item w-1/4">{lastName}</td>
-            <td className="table-row-item w-1/4">{email}</td>
-            <td className="table-row-item w-1/4">
-              <RoleManagerDropdown userId={id} roles={roles} />
-            </td>
-            <td className="table-row-item">
-              <div className="flex items-center justify-start">
-                <button
-                  className="btn-primary-small mr-2"
-                  onClick={() => setDisplayMode('default')}
-                >
-                  Save
-                </button>
-                <button
-                  className="btn-primary-small"
-                  onClick={() => setDisplayMode('default')}
-                >
-                  Cancel
-                </button>
-              </div>
-            </td>
-          </tr>
-
-          <div className="flex flex-col p-3 border border-gray-400 rounded mb-3 md:hidden">
-            <h4 className="font-bold text-lg bg-cst-gray-800 p-2 self-start rounded-md text-cst-text-gray-800">
-              {firstName + ' ' + lastName}
-            </h4>
-            <div className="flex items-center">
-              <span>Email:</span>
-              <span>{email}</span>
-            </div>
-            <div className="flex items-center">
-              <span>Roles:</span>
-              <RoleManagerDropdown userId={id} roles={roles} minWidth="200px" />
-            </div>
-            <div className="flex items-center justify-start mt-3">
-              {' '}
+        <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:table-row">
+          <td className="hidden md:table-row-item md:table-cell">{id}</td>
+          <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+            <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
+              First name:
+            </span>
+            {firstName}
+          </td>
+          <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+            <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
+              Last name:
+            </span>
+            {lastName}
+          </td>
+          <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+            <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
+              Email:
+            </span>
+            {email}
+          </td>
+          <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+            <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
+              Roles:
+            </span>
+            <RoleManagerDropdown userId={id} roles={roles} />
+          </td>
+          <td className="md:table-row-item">
+            <div className="flex items-center justify-start">
               <button
-                className="btn-primary w-24 mr-2"
+                className="btn-primary-small mr-2"
                 onClick={() => setDisplayMode('default')}
               >
                 Save
               </button>
               <button
-                className="btn-primary w-24"
+                className="btn-primary-small"
                 onClick={() => setDisplayMode('default')}
               >
                 Cancel
               </button>
             </div>
-          </div>
-        </>
+          </td>
+        </tr>
       );
     }
 
     return (
-      <>
-        <tr className="text-base text-gray-700 hidden md:table-row">
-          <td className="table-row-item">{id}</td>
-          <td className="table-row-item w-1/4">{firstName}</td>
-          <td className="table-row-item w-1/4">{lastName}</td>
-          <td className="table-row-item w-1/4">{email}</td>
-          <td className="table-row-item w-1/4">{renderRoles(roles)}</td>
-          <td className="table-row-item whitespace-nowrap">
-            <div className="flex flex-col lg:flex-row">
-              <div
-                className="action-link mb-2 lg:mb-0 lg:mr-2"
-                onClick={() => setDisplayMode('edit')}
-              >
-                {<EditIcon className="fill-gray-500 mr-1" />}
-                <span>Edit</span>
-              </div>
-              <div
-                className="action-link"
-                onClick={() => setDisplayMode('roleManagement')}
-              >
-                {<ProfileIcon className="fill-gray-500 mr-1" />}
-                <span>Manage Roles</span>
-              </div>
-            </div>
-          </td>
-        </tr>
-
-        <div className="flex flex-col p-3 border border-gray-400 rounded mb-3 md:hidden">
-          <h4 className="font-bold text-lg bg-cst-gray-800 p-2 self-start rounded-md text-cst-text-gray-800">
-            {firstName + ' ' + lastName}
-          </h4>
-          <div className="flex items-center">
-            <span>Email:</span>
-            <span>{email}</span>
-          </div>
-          <div className="flex items-center">
-            <span>Roles:</span>
-            <span>{renderRoles(roles)}</span>
-          </div>
-          <div className="flex items-center justify-start mt-3">
-            {' '}
+      <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:table-row">
+        <td className="hidden md:table-row-item md:table-cell">{id}</td>
+        <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+          <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
+            First name:
+          </span>
+          {firstName}
+        </td>
+        <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+          <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
+            Last name:
+          </span>
+          {lastName}
+        </td>
+        <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+          <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
+            Email:
+          </span>
+          {email}
+        </td>
+        <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
+          <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
+            Roles:
+          </span>
+          {renderRoles(roles)}
+        </td>
+        <td className="mt-3 justify-self-start md:m-0 md:table-row-item whitespace-nowrap">
+          <div className="flex flex-row md:flex-col lg:flex-row">
             <div
-              className="action-link mr-2"
+              className="action-link mr-2 md:mr-0 md:mb-2 lg:mb-0 lg:mr-2"
               onClick={() => setDisplayMode('edit')}
             >
               {<EditIcon className="fill-gray-500 mr-1" />}
@@ -292,8 +211,8 @@ const UserItem = ({ data }) => {
               <span>Manage Roles</span>
             </div>
           </div>
-        </div>
-      </>
+        </td>
+      </tr>
     );
   };
 
