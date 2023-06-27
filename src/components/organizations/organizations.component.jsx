@@ -8,7 +8,6 @@ import {
 
 import OrganizationItem from '../../components/organization-item/organization-item.component';
 import OrganizationAddForm from '../organization-item/organization-add-form.component';
-import OrganizationItemVertical from '../organization-item/organization-item-vertical.component';
 import DynamicList from '../../components/dynamic-list/dynamic-list.component';
 import Loader from '../loader/loader.component';
 
@@ -101,7 +100,6 @@ const Organizations = ({ setCrumbs }) => {
           createAction={handleCreateOrganization}
           ItemComponent={OrganizationItem}
           AddFormComponent={OrganizationAddForm}
-          ItemVerticalComponent={OrganizationItemVertical}
           showAdd={addFormIsVisible}
           setShowAdd={setAddFromIsVisible}
         />
