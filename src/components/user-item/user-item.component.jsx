@@ -58,8 +58,10 @@ const UserItem = ({ data }) => {
   const renderMode = () => {
     if (displayMode === 'edit') {
       return (
-        <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:table-row">
-          <td className="hidden md:table-cell md:table-row-item">{id}</td>
+        <tr className="flex flex-col text-base text-gray-700 border border-yellow-500 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:table-row">
+          <td className="hidden md:table-cell md:table-row-item md:border-l-8 md:border-yellow-500">
+            {id}
+          </td>
           <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
             <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
               First name:
@@ -121,8 +123,10 @@ const UserItem = ({ data }) => {
 
     if (displayMode === 'roleManagement') {
       return (
-        <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:table-row">
-          <td className="hidden md:table-row-item md:table-cell">{id}</td>
+        <tr className="flex flex-col text-base text-gray-700 border border-cst-cyan-800 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:table-row">
+          <td className="hidden md:table-row-item md:table-cell md:border-l-8 md:border-cst-cyan-800">
+            {id}
+          </td>
           <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
             <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
               First name:

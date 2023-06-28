@@ -28,8 +28,10 @@ const OrganizationItem = ({ data, updateAction }) => {
   const renderMode = () => {
     if (isInEditMode) {
       return (
-        <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:table-row">
-          <td className="hidden md:table-cell md:table-row-item">{id}</td>
+        <tr className="flex flex-col text-base text-gray-700 border border-yellow-500 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:table-row">
+          <td className="hidden md:table-cell md:table-row-item md:border-l-8 md:border-yellow-500">
+            {id}
+          </td>
           <td className="md:table-row-item md:w-1/2">
             <span className="block text-lg font-semibold text-cst-text-gray-800 mb-1 md:hidden">
               Name:

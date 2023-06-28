@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loader = ({ label }) => {
   return (
-    <div className="">
+    <div className="" data-testid="loader-1">
       <div role="status" className="">
         <svg
           aria-hidden="true"

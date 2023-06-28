@@ -26,8 +26,10 @@ const ApplicationItem = ({ data, updateAction }) => {
   const renderMode = () => {
     if (isInEditMode) {
       return (
-        <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:m-0 md:border-b md:rounded-none md:p-0 md:table-row">
-          <td className="table-row-item hidden md:table-cell">{id}</td>
+        <tr className="flex flex-col text-base text-gray-700 border border-yellow-500 rounded p-2 mb-3 md:m-0 md:border-b md:rounded-none md:p-0 md:table-row">
+          <td className="table-row-item hidden md:table-cell md:border-l-8 md:border-yellow-500">
+            {id}
+          </td>
           <td className="mb-3 md:m-0 md:table-row-item md:w-1/4">
             <span className="block text-lg font-semibold text-cst-text-gray-800 mb-1 md:hidden">
               Name:

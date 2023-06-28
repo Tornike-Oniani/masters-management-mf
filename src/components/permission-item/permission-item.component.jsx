@@ -23,8 +23,8 @@ const PermissionItem = ({ id, name, value, updateAction }) => {
     if (editMode) {
       return (
         <div className="grid grid-cols-[8px_max-content_min-content] bg-white mr-4 mb-4">
-          <div className="h-full bg-cst-cyan-800 rounded-l">&nbsp;</div>
-          <div className="border-y border-gray-500 p-3 grid grid-cols-[max-content_max-content] grid-rows-2 gap-2">
+          <div className="h-full bg-yellow-500 rounded-l">&nbsp;</div>
+          <div className="border-y border-yellow-500 p-3 grid grid-cols-[max-content_max-content] grid-rows-2 gap-2">
             <span className="font-bold">Name: </span>
             <input
               type="text"
@@ -42,7 +42,7 @@ const PermissionItem = ({ id, name, value, updateAction }) => {
               onChange={(event) => setNewValue(event.target.value)}
             />
           </div>
-          <div className="border border-gray-500 rounded-r p-3">
+          <div className="border border-yellow-500 rounded-r p-3">
             <button
               className="btn-primary-small w-full mb-2"
               onClick={handleSave}
