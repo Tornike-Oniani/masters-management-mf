@@ -69,15 +69,15 @@ const OrganizationItem = ({ data, updateAction }) => {
         <td className="p-3 col-span-3 justify-self-start font-bold text-lg text-cst-text-gray-800 bg-cst-gray-700 rounded md:text-base md:text-cst-text-gray-900 md:rounded-0 md:font-normal md:bg-white md:table-row-item md:w-1/2">
           {curName}
         </td>
-        <td className="flex flex-col items-center p-1 border border-gray-300 rounded md:p-0 md:border-0 md:rounded-0 md:table-row-item md:table-cell">
+        <td className="flex flex-col items-center p-1 border border-gray-300 rounded md:border-0 md:rounded-0 md:table-row-item md:table-cell">
           {roles}
           <span className="mt-1 md:m-0 md:hidden">Roles</span>
         </td>
-        <td className="flex flex-col items-center p-1 border border-gray-300 rounded md:p-0 md:border-0 md:rounded-0 md:table-row-item md:table-cell">
+        <td className="flex flex-col items-center p-1 border border-gray-300 rounded md:border-0 md:rounded-0 md:table-row-item md:table-cell">
           {applications}
           <span className="mt-1 md:m-0 md:hidden">Applications</span>
         </td>
-        <td className="flex flex-col items-center p-1 border border-gray-300 rounded md:p-0 md:border-0 md:rounded-0 md:table-row-item md:table-cell">
+        <td className="flex flex-col items-center p-1 border border-gray-300 rounded md:border-0 md:rounded-0 md:table-row-item md:table-cell">
           {users}
           <span className="mt-1 md:m-0 md:hidden">Users</span>
         </td>
