@@ -204,15 +204,15 @@ const UserItem = ({ data }) => {
               className="action-link mr-2 md:mr-0 md:mb-2 lg:mb-0 lg:mr-2"
               onClick={() => setDisplayMode('edit')}
             >
-              {<EditIcon className="fill-gray-500 mr-1" />}
+              {<EditIcon className="block fill-gray-500 mr-1" />}
               <span>Edit</span>
             </div>
             <div
               className="action-link"
               onClick={() => setDisplayMode('roleManagement')}
             >
-              {<ProfileIcon className="fill-gray-500 mr-1" />}
-              <span>Manage Roles</span>
+              {<ProfileIcon className="block fill-gray-500 mr-1" />}
+              <span>Roles</span>
             </div>
           </div>
         </td>

@@ -18,6 +18,13 @@ const UsersView = () => {
   ];
   const rows = [
     {
+      id: 100,
+      firstName: 'LongJosephineSam',
+      lastName: 'DoeLongSueMary',
+      email: 'LongJosephineSam.1@gmail.com',
+      roles: [],
+    },
+    {
       id: 1,
       firstName: 'fHevW',
       lastName: 'tDOihyc',

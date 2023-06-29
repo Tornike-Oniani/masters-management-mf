@@ -13,13 +13,14 @@ const Pagination = ({
 }) => {
   const handleRowsPerPageEnterDown = (event) => {
     if (event.key === 'Enter') {
-      setRowsPerPage(event.target.value);
+      setRowsPerPage(parseInt(event.target.value));
     }
   };
 
   const [inputValue, setInputValue] = useState(rowsPerPage);
   let beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1;
   let end = activePage === totalPages ? count : beginning + rowsPerPage - 1;
+  console.log(rowsPerPage, beginning, end);
 
   return (
     <div className="flex flex-col p-2 px-4 sm:py-4 sm:flex-row sm:justify-between sm:items-center">
