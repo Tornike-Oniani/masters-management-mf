@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { updateTitle, updateCrumbs } from '../../redux/headerSlice';
 
+import { getOrganizationById } from '../../services/organizations';
 import { getApplicationById } from '../../services/applications';
 import {
   getPermissionsForApplication,
@@ -11,6 +14,7 @@ import {
 import PermissionItem from '../permission-item/permission-item.component';
 
 const PermissionsView = ({ setCrumbs, application }) => {
+  const dispatch = useDispatch();
   const params = useParams();
   const [selectedApplication, setSelectedApplication] = useState({});
   const [permissions, setPermissions] = useState([]);
@@ -21,24 +25,29 @@ const PermissionsView = ({ setCrumbs, application }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    dispatch(updateTitle('Manage Permissions'));
+
     const fetchPermissions = async () => {
       const app = await getApplicationById(params.applicationId);
+      const org = await getOrganizationById(params.organizationId);
       setSelectedApplication(app);
       setPermissions(await getPermissionsForApplication(app.id));
-      setCrumbs([
-        {
-          path: '/',
-          label: 'Organizations',
-        },
-        {
-          path: '/1/applications',
-          label: 'Selected Organization',
-        },
-        {
-          path: '/1/applications/1',
-          label: app.name,
-        },
-      ]);
+      dispatch(
+        updateCrumbs([
+          {
+            path: '/',
+            label: 'Organizations',
+          },
+          {
+            path: `/${org.id}/applications`,
+            label: org.name,
+          },
+          {
+            path: '/1/applications/1',
+            label: app.name,
+          },
+        ])
+      );
       setLoading(false);
     };
     fetchPermissions();

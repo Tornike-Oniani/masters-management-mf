@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateTitle } from '../../redux/headerSlice';
 
 import { getRoles } from '../../services/roles';
 import { getAllPermissions } from '../../services/permissions';
@@ -7,6 +9,7 @@ import { getApplications } from '../../services/applications';
 import RolePermissionItem from '../role-permission-item/role-permission-item.component';
 
 const RolesView = ({ organization }) => {
+  const dispatch = useDispatch();
   const [roles, setRoles] = useState([]);
   const [applications, setApplications] = useState([]);
   const [selectedApplication, setSelectedApplication] = useState('');
@@ -23,6 +26,7 @@ const RolesView = ({ organization }) => {
   });
 
   useEffect(() => {
+    dispatch(updateTitle('Manage Roles'));
     const fetchData = async () => {
       const fRoles = await getRoles(organization.id);
       const apps = await getApplications(organization.id);

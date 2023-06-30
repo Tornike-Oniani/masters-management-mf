@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateTitle, updateCrumbs } from '../../redux/headerSlice';
 
 import {
   getOrganizations,
@@ -11,7 +13,8 @@ import OrganizationAddForm from '../organization-item/organization-add-form.comp
 import DynamicList from '../../components/dynamic-list/dynamic-list.component';
 import Loader from '../loader/loader.component';
 
-const Organizations = ({ setCrumbs }) => {
+const Organizations = () => {
+  const dispatch = useDispatch();
   // Filter text to search organizations
   const [filter, setFilter] = useState('');
   // Determines whether "Add Organization" button is visible or input + Save and Cancel buttons
@@ -22,13 +25,15 @@ const Organizations = ({ setCrumbs }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Set current navigation breadcrumbs
-    setCrumbs([
-      {
-        path: '/',
-        label: 'Organizations',
-      },
-    ]);
+    dispatch(updateTitle('Manage Organizations'));
+    dispatch(
+      updateCrumbs([
+        {
+          path: '/',
+          label: 'Organizations',
+        },
+      ])
+    );
 
     // Fetch data from API
     const fetchOrganizations = async () => {

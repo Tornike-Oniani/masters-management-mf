@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, NavLink, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateCrumbs } from '../../redux/headerSlice';
 
 import { getOrganizationById } from '../../services/organizations';
 
@@ -9,6 +11,7 @@ import UsersView from '../users-view/users-view.component';
 import Loader from '../loader/loader.component';
 
 const OrganizationView = ({ setCrumbs }) => {
+  const dispatch = useDispatch();
   const params = useParams();
   const [selectedOrganization, setSelectedOrganization] = useState({});
   const [loading, setLoading] = useState(true);
@@ -17,16 +20,18 @@ const OrganizationView = ({ setCrumbs }) => {
     const getOrganization = async () => {
       const response = await getOrganizationById(params.organizationId);
       setSelectedOrganization(response);
-      setCrumbs([
-        {
-          path: '/',
-          label: 'Organizations',
-        },
-        {
-          path: '/1/applications',
-          label: response.name,
-        },
-      ]);
+      dispatch(
+        updateCrumbs([
+          {
+            path: '/',
+            label: 'Organizations',
+          },
+          {
+            path: '/1/applications',
+            label: response.name,
+          },
+        ])
+      );
       setLoading(false);
     };
     getOrganization();

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { Routes, Route } from 'react-router-dom';
 
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs.component';
@@ -7,7 +8,7 @@ import OrganizationView from '../../components/organization-view/organization-vi
 import PermissionsView from '../../components/permissions-view/permissions-view.component';
 
 const Homepage = () => {
-  const [crumbs, setCrumbs] = useState([]);
+  const { title, crumbs } = useSelector((state) => state.header);
 
   return (
     // Gray background
@@ -18,21 +19,18 @@ const Homepage = () => {
           {/* Title & breadcrumbs */}
           <div className="">
             <h3 className="font-bold text-2xl text-cst-text-gray-800 mb-2">
-              Manage Organizations
+              {title}
             </h3>
             <Breadcrumbs crumbs={crumbs} />
           </div>
         </div>
         <div className="">
           <Routes>
-            <Route path="/" element={<Organizations setCrumbs={setCrumbs} />} />
-            <Route
-              path="/:organizationId/*"
-              element={<OrganizationView setCrumbs={setCrumbs} />}
-            />
+            <Route path="/" element={<Organizations />} />
+            <Route path="/:organizationId/*" element={<OrganizationView />} />
             <Route
               path="/:organizationId/applications/:applicationId"
-              element={<PermissionsView setCrumbs={setCrumbs} />}
+              element={<PermissionsView />}
             />
           </Routes>
         </div>

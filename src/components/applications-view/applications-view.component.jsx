@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateTitle } from '../../redux/headerSlice';
 
 import DynamicList from '../dynamic-list/dynamic-list.component';
 import ApplicationItem from '../application-item/application-item.component';
@@ -7,12 +9,15 @@ import ApplicationAddForm from '../application-item/application-add-form.compone
 import { getApplications, addApplication } from '../../services/applications';
 
 const ApplicationsView = ({ organization }) => {
+  const dispatch = useDispatch();
   const [filter, setFilter] = useState('');
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    dispatch(updateTitle('Manage Applications'));
+
     const fetchApplications = async () => {
       setApplications(await getApplications(organization.id));
       setLoading(false);

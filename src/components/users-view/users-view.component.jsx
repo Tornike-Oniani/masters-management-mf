@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateTitle } from '../../redux/headerSlice';
 
 import DynamicList from '../dynamic-list/dynamic-list.component';
 import UserItem from '../user-item/user-item.component';
 import UserAddForm from '../user-item/user-add-form.component';
 
 const UsersView = () => {
+  const dispatch = useDispatch();
   const [filter, setFilter] = useState('');
   const [addFormIsVisible, setAddFormIsVisible] = useState(false);
+
+  useEffect(() => {
+    dispatch(updateTitle('Manage Users'));
+  }, []);
 
   const columns = [
     { accessor: 'id', label: '#' },
