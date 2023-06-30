@@ -85,7 +85,7 @@ const DynamicList = ({
               })}
             </tr>
           </thead>
-          <tbody className="flex flex-wrap gap-3 [&>*]:flex-grow md:table-row-group">
+          <tbody className="table-row-group">
             {showAdd ? (
               <AddFormComponent
                 createAction={createAction}

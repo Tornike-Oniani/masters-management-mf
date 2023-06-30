@@ -4,10 +4,10 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-cst-lavender-800 hover:bg-cst-lavender-900 text-white py-2 px-4 rounded transition-colors duration-100;
+    @apply bg-cst-lavender-800 hover:bg-cst-lavender-900 text-white py-2 px-4 rounded transition-colors duration-300;
   }
   .btn-primary-small {
-    @apply bg-cst-lavender-800 hover:bg-cst-lavender-900 text-white py-1 px-2 rounded transition-colors duration-100;
+    @apply bg-cst-lavender-800 hover:bg-cst-lavender-900 text-white py-1 px-2 rounded transition-colors duration-300;
   }
   .text-input {
     @apply appearance-none border border-gray-400 rounded py-2 px-3 text-cst-text-gray-800 focus:outline-none focus:border-gray-500;
@@ -22,7 +22,7 @@
     @apply py-3 px-5 text-base font-semibold tracking-wide text-left text-cst-text-gray-800;
   }
   .action-link {
-    @apply py-1 px-2 border border-gray-500 rounded cursor-pointer flex items-center;
+    @apply py-1 px-2 border border-gray-500 rounded cursor-pointer flex items-center hover:bg-cst-dark-gray-800 hover:text-white transition-colors duration-300;
   }
 }
 

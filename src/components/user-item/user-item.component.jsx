@@ -70,7 +70,7 @@ const UserItem = ({ data }) => {
               type="text"
               value={firstNameTextInput}
               onChange={handleChange}
-              className="text-input w-full"
+              className="text-input-small w-full"
               name="first_name"
             />
           </td>
@@ -82,7 +82,7 @@ const UserItem = ({ data }) => {
               type="text"
               value={lastNameTextInput}
               onChange={handleChange}
-              className="text-input w-full"
+              className="text-input-small w-full"
               name="last_name"
             />
           </td>
@@ -94,7 +94,7 @@ const UserItem = ({ data }) => {
               type="email"
               value={emailTextInput}
               onChange={handleChange}
-              className="text-input w-full"
+              className="text-input-small w-full"
               name="email"
             />
           </td>

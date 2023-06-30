@@ -40,7 +40,7 @@ const OrganizationItem = ({ data, updateAction }) => {
               type="text"
               value={updateName}
               onChange={handleNameChange}
-              className="text-input w-full"
+              className="text-input-small w-full"
             />
           </td>
           <td className="hidden md:table-cell md:table-row-item">{roles}</td>
@@ -87,13 +87,20 @@ const OrganizationItem = ({ data, updateAction }) => {
           <div className="flex items-center justify-start">
             <NavLink
               to={`/${data.id}/applications`}
-              className="action-link mr-2"
+              className="action-link group mr-2"
             >
-              {<BrowseIcon className="fill-gray-500 mr-1" />}
+              {
+                <BrowseIcon className="fill-gray-500 mr-1 group-hover:fill-white transition-colors duration-300" />
+              }
               <span>Browse</span>
             </NavLink>
-            <div className="action-link" onClick={() => setIsInEditMode(true)}>
-              {<EditIcon className="fill-gray-500 mr-1" />}
+            <div
+              className="action-link group"
+              onClick={() => setIsInEditMode(true)}
+            >
+              {
+                <EditIcon className="fill-gray-500 mr-1 group-hover:fill-white transition-colors duration-300" />
+              }
               <span>Edit</span>
             </div>
           </div>

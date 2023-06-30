@@ -17,7 +17,7 @@ const OrganizationAddForm = ({ createAction, setVisibility }) => {
         <input
           type="text"
           placeholder="Organization name"
-          className="text-input w-full"
+          className="text-input-small w-full"
           value={name}
           onChange={(event) => setName(event.target.value)}
         />

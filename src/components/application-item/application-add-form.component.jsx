@@ -18,7 +18,7 @@ const ApplicationAddForm = ({ createAction, setVisibility }) => {
         <input
           type="text"
           placeholder="Application name"
-          className="text-input w-full"
+          className="text-input-small w-full"
           value={name}
           onChange={(event) => setName(event.target.value)}
         />
@@ -27,7 +27,7 @@ const ApplicationAddForm = ({ createAction, setVisibility }) => {
         <input
           type="text"
           placeholder="Access key"
-          className="text-input w-full"
+          className="text-input-small w-full"
           value={key}
           onChange={(event) => setKey(event.target.value)}
         />

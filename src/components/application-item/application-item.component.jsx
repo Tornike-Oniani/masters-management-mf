@@ -36,7 +36,7 @@ const ApplicationItem = ({ data, updateAction }) => {
             </span>
             <input
               type="text"
-              className="text-input w-full"
+              className="text-input-small w-full"
               value={updatedName}
               onChange={(event) => setUpdatedName(event.target.value)}
             />
@@ -47,7 +47,7 @@ const ApplicationItem = ({ data, updateAction }) => {
             </span>
             <input
               type="text"
-              className="text-input w-full"
+              className="text-input-small w-full"
               value={updatedKey}
               onChange={(event) => setUpdatedKey(event.target.value)}
             />

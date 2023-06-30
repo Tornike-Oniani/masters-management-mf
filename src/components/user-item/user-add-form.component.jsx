@@ -20,19 +20,23 @@ const UserAddForm = ({ createAction, setVisibility }) => {
       <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
         <input
           type="text"
-          className="text-input w-full"
+          className="text-input-small w-full"
           placeholder="First name"
         />
       </td>
       <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
         <input
           type="text"
-          className="text-input w-full"
+          className="text-input-small w-full"
           placeholder="Last name"
         />
       </td>
       <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
-        <input type="text" className="text-input w-full" placeholder="Email" />
+        <input
+          type="text"
+          className="text-input-small w-full"
+          placeholder="Email"
+        />
       </td>
       <td className="hidden md:table-cell md:table-row-item md:w-1/4">
         &nbsp;
