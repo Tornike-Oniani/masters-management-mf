@@ -28,7 +28,9 @@ const mount = (el, { onNavigate, isRunInIsolation = false }) => {
   } else {
     root.render(
       <HistoryMemoryRouter history={memoryHistory}>
-        <App onNavigate={onNavigate} />
+        <Provider store={store}>
+          <App onNavigate={onNavigate} />
+        </Provider>
       </HistoryMemoryRouter>
     );
   }
