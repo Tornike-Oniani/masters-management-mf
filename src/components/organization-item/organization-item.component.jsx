@@ -66,24 +66,30 @@ const OrganizationItem = ({ data, updateAction }) => {
     }
 
     return (
-      <tr className="grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_min-content)] gap-x-2 gap-y-3 justify-items-start text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:rounded-none md:table-row">
+      <tr className="grid grid-cols-[repeat(3,_max-content)_1fr] grid-rows-[repeat(3,_min-content)] gap-x-2 gap-y-3 justify-items-start text-base text-gray-700 border border-gray-300 rounded p-0 mb-3 shadow-md md:shadow-none md:p0 md:m-0 md:border-b md:rounded-none md:table-row">
         <td className="table-row-item hidden md:table-cell">{id}</td>
-        <td className="p-3 col-span-3 justify-self-start font-bold text-lg text-cst-text-gray-800 bg-cst-gray-700 rounded md:text-base md:text-cst-text-gray-900 md:rounded-0 md:font-normal md:bg-white md:table-row-item md:w-1/2">
+        <td className="p-3 col-span-4 justify-self-stretch font-bold text-lg text-cst-text-gray-800 bg-cst-gray-800 rounded md:text-base md:text-cst-text-gray-900 md:rounded-0 md:font-normal md:bg-white md:table-row-item md:w-1/2">
           {curName}
         </td>
-        <td className="flex flex-col items-center p-1 border border-gray-300 rounded md:border-0 md:rounded-0 md:table-row-item md:table-cell">
+        <td className="flex flex-col items-center p-0 border border-gray-300 rounded text-lg ml-2 md:m-0 md:text-base md:border-0 md:rounded-0 md:table-row-item md:table-cell">
           {roles}
-          <span className="mt-1 md:m-0 md:hidden">Roles</span>
+          <span className="block bg-cst-cyan-800 text-base text-white py-1 px-2 mt-1 md:m-0 md:hidden">
+            Roles
+          </span>
         </td>
-        <td className="flex flex-col items-center p-1 border border-gray-300 rounded md:border-0 md:rounded-0 md:table-row-item md:table-cell">
+        <td className="flex flex-col items-center p-0 border border-gray-300 rounded text-lg md:text-base md:border-0 md:rounded-0 md:table-row-item md:table-cell">
           {applications}
-          <span className="mt-1 md:m-0 md:hidden">Applications</span>
+          <span className="block bg-cst-cyan-800 text-base text-white py-1 px-2 mt-1 md:m-0 md:hidden">
+            Apps
+          </span>
         </td>
-        <td className="flex flex-col items-center p-1 border border-gray-300 rounded md:border-0 md:rounded-0 md:table-row-item md:table-cell">
+        <td className="flex flex-col items-center p-0 border border-gray-300 rounded text-lg md:text-base md:border-0 md:rounded-0 md:table-row-item md:table-cell">
           {users}
-          <span className="mt-1 md:m-0 md:hidden">Users</span>
+          <span className="block bg-cst-cyan-800 text-base text-white py-1 px-2 mt-1 md:m-0 md:hidden">
+            Users
+          </span>
         </td>
-        <td className="col-span-3 md:table-row-item">
+        <td className="ml-2 mb-2 md:m-0 col-span-3 md:table-row-item">
           <div className="flex items-center justify-start">
             <NavLink
               to={`/${data.id}/applications`}
