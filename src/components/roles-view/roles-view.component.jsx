@@ -7,6 +7,7 @@ import { getAllPermissions } from '../../services/permissions';
 import { getApplications } from '../../services/applications';
 
 import RolePermissionItem from '../role-permission-item/role-permission-item.component';
+import MenuIcon from '../../assets/menu.svg';
 
 const RolesView = ({ organization }) => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const RolesView = ({ organization }) => {
   const [selectedRole, setSelectedRole] = useState({});
   const [selectedPermissions, setSelectedPermissions] = useState([]);
   const [filter, setFilter] = useState('');
+  const [rolesExpanded, setRolesExpanded] = useState(false);
 
   const rolePermissions = permissions.map((p) => {
     return {
@@ -96,8 +98,8 @@ const RolesView = ({ organization }) => {
 
   return (
     <div>
-      <div className="flex">
-        <div className="flex flex-col bg-gray-100 p-4">
+      <div className="flex relative">
+        <div className="flex-col bg-gray-100 p-4 hidden md:flex">
           <input
             type="text"
             placeholder="Search role"
@@ -119,11 +121,25 @@ const RolesView = ({ organization }) => {
             );
           })}
         </div>
+        <div
+          className={
+            'bg-gray-100 md:hidden ' +
+            (rolesExpanded ? 'absolute h-full w-24' : '')
+          }
+        >
+          <div
+            className="p-2 cursor-pointer"
+            onClick={() => setRolesExpanded(true)}
+          >
+            <MenuIcon className="block w-7 h-7 fill-gray-500" />
+          </div>
+        </div>
+        <div className=""></div>
         <div className="w-full flex flex-col p-4">
-          <div className="flex justify-between items-center p-3">
-            <div className="flex items-center">
-              <span className="text-base font-semibold block mr-3">
-                View permissions for:{' '}
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center p-3">
+            <div className="flex items-center mb-2 md:m-0">
+              <span className="block mr-2 font-bold text-cst-text-gray-800">
+                View:{' '}
               </span>
               <select
                 name="applications"
@@ -152,7 +168,6 @@ const RolesView = ({ organization }) => {
               <thead className="border-b border-gray-300 font-semibold">
                 <tr>
                   <td className="border-r border-gray-300 p-3">Name</td>
-                  <td className="border-r border-gray-300 p-3">Value</td>
                   <td className="border-r border-gray-300 p-3">Application</td>
                   <td className="p-3">Assigned?</td>
                 </tr>

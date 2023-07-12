@@ -71,40 +71,37 @@ const ApplicationItem = ({ data, updateAction }) => {
     }
 
     return (
-      <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:m-0 md:border-b md:rounded-none md:p-0 md:table-row">
+      <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-0 mb-3 shadow-md md:shadow-none md:m-0 md:border-b md:rounded-none md:p-0 md:table-row">
         <td className="table-row-item hidden md:table-cell">{id}</td>
-        <td className="mb-3 md:m-0 md:table-row-item md:w-1/4">
-          <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
-            Name:
-          </span>
+        <td className="p-3 bg-cst-gray-900 mb-3 font-bold text-lg text-cst-text-gray-800 md:font-normal md:bg-white md:m-0 md:table-row-item md:w-1/4">
           {name}
         </td>
-        <td className="mb-3 md:m-0 md:table-row-item md:w-1/3">
+        <td className="ml-2 mb-3 md:m-0 md:table-row-item md:w-1/3">
           <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
             Key:
           </span>
           {key}
         </td>
-        <td className="mb-3 md:m-0 flex items-center md:table-cell md:table-row-item">
+        <td className="ml-2 mb-3 md:m-0 flex items-center md:table-cell md:table-row-item">
           <span className="block mr-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
             Permissions:
           </span>
           {permissions}
         </td>
-        <td className="self-start md:table-row-item">
+        <td className="self-start ml-2 mb-2 md:m-0 md:table-row-item">
           <div className="flex flex-row md:flex-col lg:flex-row">
             <NavLink
               className="action-link mr-2 md:mr-0 md:mb-2 lg:mb-0 lg:mr-2"
               to={`./${id}`}
             >
-              <BrowseIcon className="fill-gray-500 mr -1" />
+              <BrowseIcon className="fill-inherit block mr-1" />
               <span>Browse</span>
             </NavLink>
             <button
               className="action-link"
               onClick={() => setIsInEditMode(true)}
             >
-              <EditIcon className="fill-gray-500 mr-1" />
+              <EditIcon className="fill-inherit block mr-1" />
               <span>Edit</span>
             </button>
           </div>

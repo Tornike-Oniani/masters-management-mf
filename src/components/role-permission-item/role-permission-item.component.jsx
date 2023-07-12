@@ -5,7 +5,6 @@ import StyledCheckbox from '../styled-checkbox/styled-checkbox.component';
 const RolePermissionItem = ({
   id,
   name,
-  value,
   application,
   assigned,
   assignAction,
@@ -17,9 +16,8 @@ const RolePermissionItem = ({
   return (
     <tr>
       <td className="border-r border-gray-300 p-3">{name}</td>
-      <td className="border-r border-gray-300 p-3">{value}</td>
       <td className="border-r border-gray-300 p-3">{application}</td>
-      <td className="p-3">
+      <td className="p-3 whitespace-nowrap w-[1%]">
         {/*<input type="checkbox" checked={assigned} onChange={handleCheck} />*/}
         <StyledCheckbox
           id={id}

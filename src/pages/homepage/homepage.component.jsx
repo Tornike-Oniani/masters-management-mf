@@ -13,11 +13,11 @@ const Homepage = () => {
   return (
     // Gray background
     <div className="w-full min-h-screen max-h-full bg-cst-gray-800">
-      <div className=" w-full lg:w-11/12 xl:w-4/5 m-auto">
+      <div className="w-full lg:w-11/12 xl:w-4/5 m-auto pt-16">
         {/* Header with title, breadcrumbs, search, add */}
         <div className="flex justify-between py-8">
           {/* Title & breadcrumbs */}
-          <div className="">
+          <div className="pl-4 lg:p-0">
             <h3 className="font-bold text-2xl text-cst-text-gray-800 mb-2">
               {title}
             </h3>

@@ -22,7 +22,7 @@
     @apply py-3 px-5 text-base font-semibold tracking-wide text-left text-cst-text-gray-800;
   }
   .action-link {
-    @apply py-1 px-2 border border-gray-500 rounded cursor-pointer flex items-center hover:bg-cst-dark-gray-800 hover:text-white transition-colors duration-300;
+    @apply py-1 px-2 border border-gray-500 rounded cursor-pointer flex items-center fill-gray-500 hover:fill-white hover:bg-cst-dark-gray-800 hover:text-white transition-colors duration-300;
   }
 }
 

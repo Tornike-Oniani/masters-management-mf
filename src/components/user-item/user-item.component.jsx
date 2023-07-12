@@ -34,7 +34,7 @@ const UserItem = ({ data }) => {
         result.push(
           <span
             key={i}
-            className="text-sm text-cst-lavender-700 border border-cst-lavender-700 rounded p-1"
+            className="text-sm text-cst-cyan-800 border border-cst-cyan-800 rounded p-1"
           >
             +{roles.length - 2}
           </span>
@@ -45,7 +45,7 @@ const UserItem = ({ data }) => {
       result.push(
         <span
           key={i}
-          className="text-sm text-white bg-cst-lavender-700 p-1 rounded mr-1"
+          className="text-sm text-white bg-cst-cyan-900 p-1 rounded mr-1"
         >
           {roles[i]}
         </span>
@@ -175,13 +175,13 @@ const UserItem = ({ data }) => {
       <tr className="flex flex-col text-base text-gray-700 border border-gray-300 rounded p-2 mb-3 md:p0 md:m-0 md:border-b md:table-row">
         <td className="hidden md:table-row-item md:table-cell">{id}</td>
         <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
-          <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
+          <span className="inline-block mr-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
             First name:
           </span>
           {firstName}
         </td>
         <td className="mb-2 md:m-0 md:table-row-item md:w-1/4">
-          <span className="block mb-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
+          <span className="inline-block mr-1 text-base text-cst-text-gray-800 font-semibold md:hidden">
             Last name:
           </span>
           {lastName}

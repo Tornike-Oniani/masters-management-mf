@@ -8,26 +8,26 @@ const devConfig = {
   mode: 'development',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: 'http://localhost:8081/',
+    publicPath: 'http://localhost:3001/',
     filename: 'bundle.js',
   },
   devtool: 'inline-source-map',
   devServer: {
-    port: 8081,
+    port: 3001,
     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, '../public'),
     },
   },
   plugins: [
-    // new ModuleFederationPlugin({
-    //   name: 'management',
-    //   filename: 'remoteEntry.js',
-    //   exposes: {
-    //     './ManagementApp': './src/bootstrap',
-    //   },
-    //   shared: ['react', 'react-dom'],
-    // }),
+    new ModuleFederationPlugin({
+      name: 'management',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './ManagementApp': './src/bootstrap',
+      },
+      shared: ['react', 'react-dom', 'miragejs'],
+    }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       publicPath: 'auto',

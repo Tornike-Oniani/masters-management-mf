@@ -6,8 +6,7 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import App from './App';
-
-import './server/server';
+import createServer from './server/server';
 
 const mount = (el, { onNavigate, isRunInIsolation = false }) => {
   const memoryHistory = createMemoryHistory();
@@ -18,6 +17,7 @@ const mount = (el, { onNavigate, isRunInIsolation = false }) => {
   // In case of isolation we use BrowserRouter so that the current url is visible on address bar
   // Otherwise we use MemoryRouter so that it won't conflict with container's router
   if (isRunInIsolation) {
+    createServer();
     root.render(
       <BrowserRouter>
         <Provider store={store}>

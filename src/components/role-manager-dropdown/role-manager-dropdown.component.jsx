@@ -55,7 +55,7 @@ const RoleManagerDropdown = ({ userId, roles, minWidth }) => {
         result.push(
           <span
             key={i}
-            className="inline-block text-sm text-cst-lavender-700 border border-cst-lavender-700 rounded p-1"
+            className="inline-block text-sm text-cst-cyan-900 border border-cst-cyan-900 rounded p-1"
           >
             +{roles.length - 2}
           </span>
@@ -66,7 +66,7 @@ const RoleManagerDropdown = ({ userId, roles, minWidth }) => {
       result.push(
         <span
           key={i}
-          className="inline-block text-sm text-white bg-cst-lavender-700 p-1 rounded mr-1"
+          className="inline-block text-sm text-white bg-cst-cyan-900 p-1 rounded mr-1"
         >
           {roles[i]}
         </span>
