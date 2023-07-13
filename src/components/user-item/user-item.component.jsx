@@ -14,6 +14,7 @@ const UserItem = ({ data }) => {
   const [firstNameTextInput, setFirstNameTextInput] = useState(firstName);
   const [lastNameTextInput, setLastNameTextInput] = useState(lastName);
   const [emailTextInput, setEmailTextInput] = useState(email);
+  const [isManager, setIsManager] = useState(false);
 
   const handleChange = (event) => {
     if (event.target.name === 'first_name') {
@@ -199,20 +200,32 @@ const UserItem = ({ data }) => {
           {renderRoles(roles)}
         </td>
         <td className="mt-3 justify-self-start md:m-0 md:table-row-item whitespace-nowrap">
-          <div className="flex flex-row md:flex-col lg:flex-row">
+          <div className="flex flex-row md:flex-col min-[1430px]:flex-row">
             <div
-              className="action-link mr-2 md:mr-0 md:mb-2 lg:mb-0 lg:mr-2"
+              className="action-link mr-2 md:mr-0 md:mb-2 2xl:mb-0 2xl:mr-2"
               onClick={() => setDisplayMode('edit')}
             >
-              {<EditIcon className="block fill-gray-500 mr-1" />}
+              {<EditIcon className="block fill-inherit mr-1" />}
               <span>Edit</span>
             </div>
             <div
-              className="action-link"
+              className="action-link md:mr-0 md:mb-2 2xl:mb-0 2xl:mr-2"
               onClick={() => setDisplayMode('roleManagement')}
             >
-              {<ProfileIcon className="block fill-gray-500 mr-1" />}
+              {<ProfileIcon className="block fill-inherit mr-1" />}
               <span>Roles</span>
+            </div>
+            <div
+              className={
+                'action-link md:mr-0 md:mb-2 2xl:mb-0 2xl:mr-2 ' +
+                (isManager
+                  ? 'b-green-500 bg-green-500 text-white fill-white'
+                  : '')
+              }
+              onClick={() => setIsManager(!isManager)}
+            >
+              {<ProfileIcon className="block fill-inherit mr-1" />}
+              <span>Manager</span>
             </div>
           </div>
         </td>

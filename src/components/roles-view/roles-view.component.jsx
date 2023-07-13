@@ -8,6 +8,7 @@ import { getApplications } from '../../services/applications';
 
 import RolePermissionItem from '../role-permission-item/role-permission-item.component';
 import MenuIcon from '../../assets/menu.svg';
+import CloseIcon from '../../assets/cross.svg';
 
 const RolesView = ({ organization }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const RolesView = ({ organization }) => {
   const [selectedPermissions, setSelectedPermissions] = useState([]);
   const [filter, setFilter] = useState('');
   const [rolesExpanded, setRolesExpanded] = useState(false);
+  const [roleAddFormVisible, setRoleAddFormVisible] = useState(false);
 
   const rolePermissions = permissions.map((p) => {
     return {
@@ -103,8 +105,35 @@ const RolesView = ({ organization }) => {
           <input
             type="text"
             placeholder="Search role"
-            className="px-3 py-2 border border-gray-400 rounded mb-3"
+            className="text-input rounded mb-3"
           />
+          <button
+            className={
+              'btn-primary mb-3 ' + (roleAddFormVisible ? 'hidden' : '')
+            }
+            onClick={() => setRoleAddFormVisible(true)}
+          >
+            New Role
+          </button>
+
+          <div
+            className={
+              'flex flex-col mb-3 ' + (roleAddFormVisible ? '' : 'hidden')
+            }
+          >
+            <input
+              type="text"
+              className="text-input mb-1"
+              placeholder="Role name"
+            />
+            <button
+              className="btn-primary"
+              onClick={() => setRoleAddFormVisible(false)}
+            >
+              Add role
+            </button>
+          </div>
+
           {roles.map((role) => {
             return (
               <div
@@ -123,15 +152,72 @@ const RolesView = ({ organization }) => {
         </div>
         <div
           className={
-            'bg-gray-100 md:hidden ' +
-            (rolesExpanded ? 'absolute h-full w-24' : '')
+            'bg-gray-100 flex flex-col md:hidden ' +
+            (rolesExpanded ? 'absolute h-full w-full' : '')
           }
         >
           <div
-            className="p-2 cursor-pointer"
+            className={'p-2 cursor-pointer ' + (rolesExpanded ? 'hidden' : '')}
             onClick={() => setRolesExpanded(true)}
           >
             <MenuIcon className="block w-7 h-7 fill-gray-500" />
+          </div>
+          <div
+            className={
+              'p-2 cursor-pointer self-end ' + (rolesExpanded ? '' : 'hidden')
+            }
+            onClick={() => setRolesExpanded(false)}
+          >
+            <CloseIcon className="block w-7 h-7 fill-gray-500" />
+          </div>
+          <div className={'flex flex-col ' + (rolesExpanded ? '' : 'hidden')}>
+            <input
+              type="text"
+              placeholder="Search role"
+              className="text-input rounded mb-3"
+            />
+            <button
+              className={
+                'btn-primary mb-3 ' + (roleAddFormVisible ? 'hidden' : '')
+              }
+              onClick={() => setRoleAddFormVisible(true)}
+            >
+              New Role
+            </button>
+
+            <div
+              className={
+                'flex flex-col mb-3 ' + (roleAddFormVisible ? '' : 'hidden')
+              }
+            >
+              <input
+                type="text"
+                className="text-input mb-1"
+                placeholder="Role name"
+              />
+              <button
+                className="btn-primary"
+                onClick={() => setRoleAddFormVisible(false)}
+              >
+                Add role
+              </button>
+            </div>
+
+            {roles.map((role) => {
+              return (
+                <div
+                  key={role.name}
+                  role-id={role.id}
+                  className={
+                    'px-3 py-3 hover:bg-gray-200 cursor-pointer rounded' +
+                    (selectedRole.name === role.name ? ' bg-gray-200' : '')
+                  }
+                  onClick={handleSelectRole}
+                >
+                  {role.name}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className=""></div>
